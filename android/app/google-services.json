@@ -1,0 +1,47 @@
+{
+  "project_info": {
+    "project_number": "225437587035",
+    "project_id": "lucent-cc314",
+    "storage_bucket": "lucent-cc314.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:225437587035:android:93056a329f18149adc917e",
+        "android_client_info": {
+          "package_name": "com.lucent"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "225437587035-2e2eagokqgsf9uiiv3dn0og7230e8m8f.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.lucent",
+            "certificate_hash": "c5c2c372a183dbf4ac199387595e30503a9082c3"
+          }
+        },
+        {
+          "client_id": "225437587035-kb59cvdp0dvsqs9mk9pjg3c0g0s7qrk5.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyA_lJ2bYXq2UyVPJIkHdFVKTK5jMtfx1t0"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "225437587035-kb59cvdp0dvsqs9mk9pjg3c0g0s7qrk5.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
