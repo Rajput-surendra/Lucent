@@ -56,6 +56,7 @@ class _ServiceBrandScreenState extends State<ServiceBrandScreen> {
           body: Padding(
             padding: const EdgeInsets.all(8.0),
             child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   getBrandModel == null ? Center(child: CircularProgressIndicator()):
                   getBrandModel!.data!.length == 0 ?
@@ -72,21 +73,36 @@ class _ServiceBrandScreenState extends State<ServiceBrandScreen> {
                               shape: RoundedRectangleBorder(
                                   borderRadius: BorderRadius.circular(10)
                               ),
-                              child: Column(
+                              child: Row(
+                                mainAxisAlignment: MainAxisAlignment.start,
                                 children: [
-                                  Container(
-                                      height: 170,
-                                      width: double.infinity,
-                                      decoration: BoxDecoration(
-                                          borderRadius: BorderRadius.circular(10)
-                                      ),
-                                      child: ClipRRect(
-                                          borderRadius: BorderRadius.circular(10),
-                                          child: Image.network("${getBrandModel!.data![index].image}",fit: BoxFit.fill,))),
-                                  Center(child: Padding(
+                                  Padding(
                                     padding: const EdgeInsets.all(8.0),
-                                    child: Text("${getBrandModel!.data![index].title}",style: TextStyle(fontWeight: FontWeight.bold,fontSize: 18),),
-                                  ))
+                                    child: Container(
+                                        height: 120,
+                                        width:140,
+                                        decoration: BoxDecoration(
+                                          color: colors.darkIcon,
+                                            borderRadius: BorderRadius.circular(10),
+                                        ),
+                                        child: Padding(
+                                          padding: const EdgeInsets.all(2.0),
+                                          child: ClipRRect(
+                                             borderRadius: BorderRadius.circular(10),
+                                              child: Image.network("${getBrandModel!.data![index].image}",fit: BoxFit.fill,)),
+                                        )),
+                                  ),
+                                  SizedBox(width: 5,),
+                                  Column(
+                                    crossAxisAlignment: CrossAxisAlignment.start,
+                                    mainAxisAlignment: MainAxisAlignment.start,
+                                    children: [
+                                      Padding(
+                                        padding: const EdgeInsets.only(right: 20),
+                                        child: Text("${getBrandModel!.data![index].title}",style: TextStyle(fontWeight: FontWeight.bold,fontSize: 18),),
+                                      ),
+                                    ],
+                                  )
                                 ],
                               )
                           ),

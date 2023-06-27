@@ -305,7 +305,7 @@ class _BottomScreenState extends State<BottomScreen> {
               width: 30,
             ),
             title: Text(
-              'Enquiry List',
+              'My Bookings',
             ),
             onTap: () {
               Navigator.push(
@@ -340,7 +340,7 @@ class _BottomScreenState extends State<BottomScreen> {
               color: colors.primary,
             ),
             title: Text(
-              'Terms &Conditions',
+              'Terms & Conditions',
             ),
             onTap: () {
               Navigator.push(
@@ -358,6 +358,23 @@ class _BottomScreenState extends State<BottomScreen> {
             ),
             title: Text(
               'Privacy Policy',
+            ),
+            onTap: () {
+              Navigator.push(
+                context,
+                MaterialPageRoute(builder: (context) => PrivacyPolicy()),
+              );
+            },
+          ),
+          ListTile(
+            leading: Image.asset(
+              "assets/splash/privacy policy.png",
+              color: colors.primary,
+              height: 25,
+              width: 25,
+            ),
+            title: Text(
+              'Contact Us',
             ),
             onTap: () {
               Navigator.push(

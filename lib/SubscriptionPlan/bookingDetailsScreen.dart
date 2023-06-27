@@ -2,7 +2,9 @@ import 'dart:convert';
 
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:fluttertoast/fluttertoast.dart';
+import 'package:paytm_allinonesdk/paytm_allinonesdk.dart';
 import 'package:razorpay_flutter/razorpay_flutter.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
@@ -14,6 +16,7 @@ import '../Helper/Constant.dart';
 import '../New_model/CarWashing/Get_Promo_code_Model.dart';
 import '../Screen/Bottom.dart';
 import '../api/api_services.dart';
+import 'Plan_Success_Srreen.dart';
 
 class BookingDetailsScreen extends StatefulWidget {
   String? planId,amount,title,days ,brandName,modelName,nameC,societyC,
@@ -29,7 +32,6 @@ class BookingDetailsScreen extends StatefulWidget {
 
 class _BookingDetailsScreenState extends State<BookingDetailsScreen> {
 
-
   Razorpay? _razorpay;
   int? pricerazorpayy;
   @override
@@ -40,6 +42,10 @@ class _BookingDetailsScreenState extends State<BookingDetailsScreen> {
     _razorpay?.on(Razorpay.EVENT_PAYMENT_ERROR, _handlePaymentError);
     _razorpay?.on(Razorpay.EVENT_EXTERNAL_WALLET, _handleExternalWallet);
     getPromoCodeApi();
+
+  }
+  getUser(){
+
   }
 
 
@@ -62,13 +68,16 @@ class _BookingDetailsScreenState extends State<BookingDetailsScreen> {
       'block': widget.blockC.toString(),
       'flot': widget.flatC.toString(),
       'society': widget.societyC.toString(),
-       "model": widget.modelName.toString(),
-        "vehicle_number":widget.vihileNumber.toString(),
-        "parking":widget.parking.toString(),
-        "landmark":widget.landMark.toString(),
+      "model": widget.modelName.toString(),
+      "vehicle_number":widget.vihileNumber.toString(),
+      "parking":widget.parking.toString(),
+      "landmark":widget.landMark.toString(),
+      "coupon_code": promocouponC.text,
+      "discount":finalTotal,
+      "subtotal": widget.amount.toString()
 
     });
-            print('______sfcssdf____${request.fields}_________');
+    print('______sfcssdf____${request.fields}_________');
     request.headers.addAll(headers);
     http.StreamedResponse response = await request.send();
     if (response.statusCode == 200) {
@@ -77,7 +86,7 @@ class _BookingDetailsScreenState extends State<BookingDetailsScreen> {
       final finalResult = json.decode(result);
       setState(() {
       });
-      Navigator.push(context, MaterialPageRoute(builder: (context)=>BottomScreen()));
+      Navigator.push(context, MaterialPageRoute(builder: (context)=>PlanSuccessScreen()));
       Fluttertoast.showToast(msg: finalResult['message']);
     }
     else {
@@ -114,9 +123,19 @@ class _BookingDetailsScreenState extends State<BookingDetailsScreen> {
   }
 
 
+  String mid = "1", orderId = "1", amount = "100", txnToken = "";
+  String result = "1";
+  bool isStaging = false;
+  bool isApiCallInprogress = false;
+  String callbackUrl = "https://paytm.com/";
+  bool restrictAppInvoke = false;
+  bool enableAssist = true;
+
+
   TextEditingController promocouponC =  TextEditingController();
     var finalTotal;
     var disCountAmount;
+    String? couponCode;
     bool changePrice = false;
   checkPromoCode() async {
     var headers = {
@@ -124,7 +143,8 @@ class _BookingDetailsScreenState extends State<BookingDetailsScreen> {
     };
     var request = http.MultipartRequest('POST', Uri.parse('${ApiService.checkPromoCodeApi}'));
     request.fields.addAll({
-      'code': 'welcome20',
+
+      'code':promocouponC.text,
       'amount': widget.amount.toString()
     });
     print('_____checkPromoCode_____${request.fields}_________');
@@ -188,7 +208,7 @@ class _BookingDetailsScreenState extends State<BookingDetailsScreen> {
                   shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(10)),
                   elevation: 2,
                   child: Container(
-                    height: 52,
+                    height: 70,
                     width: double.infinity,
                     decoration: BoxDecoration(
                         borderRadius: BorderRadius.circular(10,)
@@ -201,15 +221,25 @@ class _BookingDetailsScreenState extends State<BookingDetailsScreen> {
                           Column(
                             crossAxisAlignment: CrossAxisAlignment.start,
                             children: [
+                              Text("Sub Total :"),
+                              SizedBox(height: 3,),
                               Text("Discount Price :"),
                               SizedBox(height: 3,),
-                              Text("Sub Total:"),
+                              Text("Final Total:"),
                             ],
                           ),
                           Column(
-                            crossAxisAlignment: CrossAxisAlignment.start,
+                            crossAxisAlignment: CrossAxisAlignment.end,
                             children: [
-                              Text("₹ ${finalTotal}",style: TextStyle(color: colors.blackTemp,fontWeight: FontWeight.bold),),
+                              Text("₹ ${widget.amount}",style: TextStyle(color: colors.blackTemp,fontWeight: FontWeight.bold),),
+                              SizedBox(height: 3,),
+                           Row(
+                             children: [
+                               Text(" - ")  ,
+                               Text("₹ ${finalTotal}",style: TextStyle(color: colors.blackTemp,fontWeight: FontWeight.bold),),
+                             ],
+                           ),
+
                               SizedBox(height: 3,),
                               Text("₹ ${disCountAmount}",style: TextStyle(color: colors.blackTemp,fontWeight: FontWeight.bold)),
                             ],
@@ -228,6 +258,8 @@ class _BookingDetailsScreenState extends State<BookingDetailsScreen> {
                     padding: const EdgeInsets.only(left: 5,right: 5,top: 5),
                     child: InkWell(
                       onTap: (){
+                        // print('xcscsfsfsdfsdxcscsfsfsdfsd');
+                        // _startTransaction();
                         if(changePrice){
                           openCheckout(disCountAmount);
                         }else{
@@ -268,12 +300,54 @@ class _BookingDetailsScreenState extends State<BookingDetailsScreen> {
                     ),
                   ),
                 ),
+
               ],
             ),
           ),
         ),
       ),
     );
+
+  }
+
+  _startTransaction() async {
+    // if (txnToken.isEmpty) {
+    //   return;
+    // }
+    var sendMap = <String, dynamic>{
+      "mid": mid,
+      "orderId": " ",
+      "amount": 100,
+      "txnToken": txnToken,
+      "callbackUrl": callbackUrl,
+      "restrictAppInvoke": restrictAppInvoke,
+      "enableAssist": enableAssist
+    };
+    print(sendMap);
+    try {
+      var response = AllInOneSdk.startTransaction(mid, orderId, amount,
+          txnToken, callbackUrl,  restrictAppInvoke, enableAssist);
+      response.then((value) {
+        print("surebdra=============>${value}");
+        setState(() {
+          result = value.toString();
+        });
+      }).catchError((onError) {
+        if (onError is PlatformException) {
+          setState(() {
+            result = onError.message.toString() +
+                " \n  " +
+                onError.details.toString();
+          });
+        } else {
+          setState(() {
+            result = onError.toString();
+          });
+        }
+      });
+    } catch (err) {
+      result = err.toString();
+    }
   }
   vehicleDetails(){
     return Container(
@@ -566,7 +640,7 @@ class _BookingDetailsScreenState extends State<BookingDetailsScreen> {
                 child:InkWell(
                   onTap: (){
                     if( promocouponC.text.isEmpty){
-                      Fluttertoast.showToast(msg: "apply promoCode!!");
+                      Fluttertoast.showToast(msg: "Select PromoCode!!");
                     }else{
                       checkPromoCode();
                     }

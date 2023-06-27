@@ -65,7 +65,7 @@ class _SubmitEnquiryListScreenState extends State<SubmitEnquiryListScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: colors.darkIcon,
-      appBar: customAppBar(context: context, text:"Enquiry List", isTrue: true, ),
+      appBar: customAppBar(context: context, text:"My Bookings", isTrue: true, ),
       body: Padding(
         padding: const EdgeInsets.all(8.0),
         child: Column(

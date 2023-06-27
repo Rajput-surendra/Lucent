@@ -125,7 +125,7 @@ class _AccessoriesState extends State<Accessories> {
                                             borderRadius: BorderRadius.circular(10),
                                             color: colors.primary
                                         ),
-                                        child: Center(child: Text("Enquiry",style: TextStyle(color: colors.whiteTemp),)),
+                                        child: Center(child: Text("Book Now",style: TextStyle(color: colors.whiteTemp),)),
                                       ),
                                     )
 

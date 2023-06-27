@@ -165,7 +165,7 @@ class _HomeScreenState extends State<HomeScreen> {
             autoPlayAnimationDuration: Duration(milliseconds: 500),
             enlargeCenterPage: false,
             scrollDirection: Axis.horizontal,
-            height: 150.0),
+            height: 200.0),
         items: _sliderModel!.data!.map((item) {
           return CommonSlider(file: item.image ?? '',);
         }).toList(),
@@ -328,150 +328,153 @@ class _HomeScreenState extends State<HomeScreen> {
           //appBar: customAppBar(context: context, text:"My Dashboard", isTrue: true, ),
           body: SafeArea(
             child: SingleChildScrollView(
-              child: Column(
-                children: [
-                  Column(
-                    // alignment: Alignment.bottomCenter,
-                    children: [
-                      SizedBox(
-                        //height: 200,
-                        width: double.maxFinite,
-                        child: _sliderModel == null
-                            ? const Center(
-                                child: CircularProgressIndicator(
-                                color: colors.primary,
-                              ))
-                            : _CarouselSlider1(),
-                      ),
-                      Padding(
-                        padding: const EdgeInsets.only(top: 2),
-                        child: Row(
-                          mainAxisAlignment: MainAxisAlignment.center,
-                          children: _buildDots(),
-                        ),
-                      ),
-                    ],
-                  ),
-                  const SizedBox(
-                    height: 5,
-                  ),
-                  Padding(
-                    padding: const EdgeInsets.all(8.0),
-                    child: Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              child: Padding(
+                padding: const EdgeInsets.only(left: 7,right: 5),
+                child: Column(
+                  children: [
+                    Column(
+                      // alignment: Alignment.bottomCenter,
                       children: [
-                        Expanded(
-                          child: InkWell(
-                            onTap: (){
-                              Navigator.push(context, MaterialPageRoute(builder: (context)=>StaticScreenService()));
-                            },
-                            child: Container(
-                             width:165,
-                              decoration: BoxDecoration(
-                                  color:  colors.primary.withOpacity(0.2),
-                                  borderRadius: BorderRadius.circular(10)
-                              ),
-                              height: 150,
-                              child: Column(
-                                children: [
-                                  Image.asset("assets/splash/service.png",height: 110,width: 80,),
-                                  Text("Service",style: TextStyle(color: colors.primary,fontWeight: FontWeight.bold))
-                                ],
-                              ),
-                            ),
-                          ),
-                        ),
                         SizedBox(
-                          width: 10,
+                          //height: 200,
+                          width: double.maxFinite,
+                          child: _sliderModel == null
+                              ? const Center(
+                                  child: CircularProgressIndicator(
+                                  color: colors.primary,
+                                ))
+                              : _CarouselSlider1(),
                         ),
-                        Expanded(
-                          child: InkWell(
-                            onTap: (){
-                              // Navigator.push(context, MaterialPageRoute(builder: (context)=>BrandScreen()));
-                              Navigator.push(context, MaterialPageRoute(builder: (context)=>Accessories()));
-                            },
-                            child: Container(
-                              // width:165,
-                              decoration: BoxDecoration(
-                                  color:  colors.primary.withOpacity(0.2),
-                                  borderRadius: BorderRadius.circular(10)
-                              ),
-                              height: 150,
-                              child: Column(
-                                children: [
-                                  Image.asset("assets/splash/asse.png",height: 110,width: 80),
-                                  Text("Accessories",style: TextStyle(color: colors.primary,fontWeight: FontWeight.bold))
-                                ],
-                              ),
-                            ),
+                        Padding(
+                          padding: const EdgeInsets.only(top: 2),
+                          child: Row(
+                            mainAxisAlignment: MainAxisAlignment.center,
+                            children: _buildDots(),
                           ),
                         ),
                       ],
                     ),
-                  ),
-                  getStaticWidget(),
-                  SizedBox(height: 10,)
-                  // Padding(
-                  //   padding: const EdgeInsets.all(8.0),
-                  //   child: Column(
-                  //       children: [
-                  //         accessoriesModel == null ? Center(child: CircularProgressIndicator()): accessoriesModel!.data!.length == 0 ?
-                  //         Center(child: Text("No data Found!!"),):Container(
-                  //           child: ListView.builder(
-                  //             shrinkWrap: true,
-                  //            physics: NeverScrollableScrollPhysics(),
-                  //             itemCount: accessoriesModel!.data!.length,
-                  //             itemBuilder: (BuildContext context, int index) {
-                  //               return InkWell(
-                  //                 onTap: (){
-                  //                Navigator.push(context, MaterialPageRoute(builder: (context)=>AccessoriesDetailsSrreen(id: accessoriesModel!.data![index].id,)));
-                  //                 },
-                  //                 child: Card(
-                  //                     shape: RoundedRectangleBorder(
-                  //                         borderRadius: BorderRadius.circular(10)
-                  //                     ),
-                  //                     child: Row(
-                  //                       children: [
-                  //                         Padding(
-                  //                           padding: const EdgeInsets.all(8.0),
-                  //                           child: Container(
-                  //                               height: 90,
-                  //                               width: 90,
-                  //                               decoration: BoxDecoration(
-                  //                                   borderRadius: BorderRadius.circular(10)
-                  //                               ),
-                  //                               child: ClipRRect(
-                  //                                   borderRadius: BorderRadius.circular(10),
-                  //                                   child: Image.network("${accessoriesModel!.data![index].logo}",fit: BoxFit.fill,))),
-                  //                         ),
-                  //                         SizedBox(height: 15,),
-                  //                         Column(
-                  //                           crossAxisAlignment: CrossAxisAlignment.start,
-                  //                           children: [
-                  //                             Container(
-                  //                               width: 190,
-                  //                                 child: Text("${accessoriesModel!.data![index].name}"
-                  //                               ,style: TextStyle(color: colors.blackTemp,fontWeight: FontWeight.bold),overflow: TextOverflow.ellipsis,)),
-                  //                             SizedBox(height: 2,),
-                  //                             Container(
-                  //                                 width: 190,
-                  //                                 child: Text("${accessoriesModel!.data![index].description}",overflow: TextOverflow.ellipsis,maxLines: 2,))
-                  //                           ],
-                  //                         ),
-                  //                       ],
-                  //                     )
-                  //                 ),
-                  //               );
-                  //             },
-                  //           ),
-                  //         )
-                  //       ]
-                  //   ),
-                  // )
+                    const SizedBox(
+                      height: 5,
+                    ),
+                    Padding(
+                      padding: const EdgeInsets.all(8.0),
+                      child: Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                        children: [
+                          Expanded(
+                            child: InkWell(
+                              onTap: (){
+                                Navigator.push(context, MaterialPageRoute(builder: (context)=>StaticScreenService()));
+                              },
+                              child: Container(
+                               width:165,
+                                decoration: BoxDecoration(
+                                    color:  colors.primary.withOpacity(0.2),
+                                    borderRadius: BorderRadius.circular(10)
+                                ),
+                                height: 170,
+                                child: Column(
+                                  children: [
+                                    Image.asset("assets/splash/service.png",height: 120,width: 100,),
+                                    Text("Service",style: TextStyle(color: colors.primary,fontWeight: FontWeight.bold))
+                                  ],
+                                ),
+                              ),
+                            ),
+                          ),
+                          SizedBox(
+                            width: 10,
+                          ),
+                          Expanded(
+                            child: InkWell(
+                              onTap: (){
+                                // Navigator.push(context, MaterialPageRoute(builder: (context)=>BrandScreen()));
+                                Navigator.push(context, MaterialPageRoute(builder: (context)=>Accessories()));
+                              },
+                              child: Container(
+                                // width:165,
+                                decoration: BoxDecoration(
+                                    color:  colors.primary.withOpacity(0.2),
+                                    borderRadius: BorderRadius.circular(10)
+                                ),
+                                height: 170,
+                                child: Column(
+                                  children: [
+                                    Image.asset("assets/splash/asse.png",height: 120,width: 100),
+                                    Text("Accessories",style: TextStyle(color: colors.primary,fontWeight: FontWeight.bold))
+                                  ],
+                                ),
+                              ),
+                            ),
+                          ),
+                        ],
+                      ),
+                    ),
+                    getStaticWidget(),
+                    SizedBox(height: 10,)
+                    // Padding(
+                    //   padding: const EdgeInsets.all(8.0),
+                    //   child: Column(
+                    //       children: [
+                    //         accessoriesModel == null ? Center(child: CircularProgressIndicator()): accessoriesModel!.data!.length == 0 ?
+                    //         Center(child: Text("No data Found!!"),):Container(
+                    //           child: ListView.builder(
+                    //             shrinkWrap: true,
+                    //            physics: NeverScrollableScrollPhysics(),
+                    //             itemCount: accessoriesModel!.data!.length,
+                    //             itemBuilder: (BuildContext context, int index) {
+                    //               return InkWell(
+                    //                 onTap: (){
+                    //                Navigator.push(context, MaterialPageRoute(builder: (context)=>AccessoriesDetailsSrreen(id: accessoriesModel!.data![index].id,)));
+                    //                 },
+                    //                 child: Card(
+                    //                     shape: RoundedRectangleBorder(
+                    //                         borderRadius: BorderRadius.circular(10)
+                    //                     ),
+                    //                     child: Row(
+                    //                       children: [
+                    //                         Padding(
+                    //                           padding: const EdgeInsets.all(8.0),
+                    //                           child: Container(
+                    //                               height: 90,
+                    //                               width: 90,
+                    //                               decoration: BoxDecoration(
+                    //                                   borderRadius: BorderRadius.circular(10)
+                    //                               ),
+                    //                               child: ClipRRect(
+                    //                                   borderRadius: BorderRadius.circular(10),
+                    //                                   child: Image.network("${accessoriesModel!.data![index].logo}",fit: BoxFit.fill,))),
+                    //                         ),
+                    //                         SizedBox(height: 15,),
+                    //                         Column(
+                    //                           crossAxisAlignment: CrossAxisAlignment.start,
+                    //                           children: [
+                    //                             Container(
+                    //                               width: 190,
+                    //                                 child: Text("${accessoriesModel!.data![index].name}"
+                    //                               ,style: TextStyle(color: colors.blackTemp,fontWeight: FontWeight.bold),overflow: TextOverflow.ellipsis,)),
+                    //                             SizedBox(height: 2,),
+                    //                             Container(
+                    //                                 width: 190,
+                    //                                 child: Text("${accessoriesModel!.data![index].description}",overflow: TextOverflow.ellipsis,maxLines: 2,))
+                    //                           ],
+                    //                         ),
+                    //                       ],
+                    //                     )
+                    //                 ),
+                    //               );
+                    //             },
+                    //           ),
+                    //         )
+                    //       ]
+                    //   ),
+                    // )
 
 
-                  // SizedBox(height: 100,),
-                ],
+                    // SizedBox(height: 100,),
+                  ],
+                ),
               ),
             ),
           ),
@@ -505,79 +508,91 @@ class _HomeScreenState extends State<HomeScreen> {
   getStaticWidget(){
     return  Padding(
       padding: const EdgeInsets.only(left: 10,right: 10),
-      child: Column(
-        children: [
-          Row(
-            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-            children: [
-              Center(child:
-              Container(
-                  child: Image.asset("assets/images/settingHome.png"))),
-              Column(
-                mainAxisAlignment: MainAxisAlignment.center,
-                crossAxisAlignment: CrossAxisAlignment.start,
+      child: Container(
+        height: MediaQuery.of(context).size.height/2.0,
+        child: Column(
+          children: [
+            Container(
+              height: MediaQuery.of(context).size.width/3,
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
-                  SizedBox(height: 8,),
-                  Text("Select Your Service",style: TextStyle(fontSize: 18,fontWeight: FontWeight.w500,
-                      color:  colors.primary
-                  ),),
-                  SizedBox(height: 3,),
-                  Text("Select the service you wish to desire",style: TextStyle(fontSize: 14),),
-                  Text("Home Cleaning or Washroom Cleaning",style: TextStyle(fontSize: 14.3),),
-                ],
-              ),
-            ],
-          ),
-          Row(
-            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-            children: [
-              Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  SizedBox(height: 3,),
-                  Text("Choose Your Time Slot",style: TextStyle(fontSize: 18,fontWeight: FontWeight.w500,
-                    color:  colors.primary
+                  Center(child:
+                  Container(
+                      child: Image.asset("assets/images/settingHome.png"))),
+                  Column(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      SizedBox(height: 8,),
+                      Text("Select Your Service",style: TextStyle(fontSize: 18,fontWeight: FontWeight.w500,
+                          color:  colors.primary
+                      ),),
+                      SizedBox(height: 3,),
+                      Text("Select the service you wish to desire",style: TextStyle(fontSize: 14),),
+                      Text("Home Cleaning or Washroom Cleaning",style: TextStyle(fontSize: 14.3),),
+                    ],
                   ),
-                  ),
-                  SizedBox(height: 3,),
-                  Text("Choose from the available time slots \n and confirm the booking."),
-                  // Padding(
-                  //   padding: const EdgeInsets.only(right: 50),
-                  //   child: Text(""),
-                  // ),
                 ],
               ),
-
-              Image.asset("assets/images/timeslot.png"),
-            ],
-          ),
-
-          Row(
-               crossAxisAlignment: CrossAxisAlignment.start,
-            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-            children: [
-              Padding(
-                padding: const EdgeInsets.only(top: 15),
-                child: Image.asset("assets/images/hassle.png"),
-              ),
-              SizedBox(width: 8,),
-              Column(
-                // mainAxisAlignment: MainAxisAlignment.center,
-                crossAxisAlignment: CrossAxisAlignment.start,
+            ),
+            Container(
+              height: MediaQuery.of(context).size.width/3,
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
-                  SizedBox(height: 18,),
-                  Text("Hassel-Free Service",style: TextStyle(fontSize: 18,fontWeight: FontWeight.w500,
-                      color: colors.primary
-                  ),),
-                  SizedBox(height: 3,),
-                  Text("Once booking is confirmed, our \n professional will visit at your doorstep & \n will serve you ",style: TextStyle(fontSize: 14),),
-
+                  Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      SizedBox(height: 25,),
+                      Text("Choose Your Time Slot",style: TextStyle(fontSize: 18,fontWeight: FontWeight.w500,
+                        color:  colors.primary
+                      ),
+                      ),
+                      SizedBox(height: 3,),
+                      Text("Choose from the available time slots and\n confirm  the booking."),
+                      // Padding(
+                      //   padding: const EdgeInsets.only(right: 50),
+                      //   child: Text(""),
+                      // ),
+                    ],
+                  ),
+                  SizedBox(width: 5,),
+                  Image.asset("assets/images/timeslot.png"),
                 ],
               ),
-            ],
-          ),
+            ),
 
-        ],
+            Container(
+              height: MediaQuery.of(context).size.width/3,
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: [
+                  Padding(
+                    padding: const EdgeInsets.only(top: 0),
+                    child: Image.asset("assets/images/hassle.png"),
+                  ),
+                  Padding(
+                    padding: const EdgeInsets.only(top: 20),
+                    child: Column(
+                      // mainAxisAlignment: MainAxisAlignment.center,
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        Text("Hassel-Free Service",style: TextStyle(fontSize: 18,fontWeight: FontWeight.w500,
+                            color: colors.primary
+                        ),),
+                        SizedBox(height: 3,),
+                        Text("Once booking is confirmed, our \n professional will visit at your doorstep  \n will serve you ",style: TextStyle(fontSize: 14),),
+
+                      ],
+                    ),
+                  ),
+                ],
+              ),
+            ),
+
+          ],
+        ),
       ),
     );
   }

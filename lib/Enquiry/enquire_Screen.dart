@@ -94,7 +94,7 @@ class _EnquireScreenState extends State<EnquireScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: colors.darkIcon,
-      appBar: customAppBar(context: context, text:"Enquiry", isTrue: true, ),
+      appBar: customAppBar(context: context, text:"Book Now", isTrue: true, ),
       body: SingleChildScrollView(
         child: Form(
           key: _formKey,
