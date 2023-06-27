@@ -17,6 +17,7 @@ import '../Helper/Color.dart';
 import '../New_model/getUserProfileModel.dart';
 import '../Notification/notification.dart';
 import '../Profile/Update_password.dart';
+import '../Static/contact_us_screen.dart';
 import '../Static/privacy_Policy.dart';
 import '../Static/terms_condition.dart';
 import '../SubscriptionPlan/SubscriptionPlanList.dart';
@@ -368,7 +369,7 @@ class _BottomScreenState extends State<BottomScreen> {
           ),
           ListTile(
             leading: Image.asset(
-              "assets/splash/privacy policy.png",
+              "assets/splash/contectus.png",
               color: colors.primary,
               height: 25,
               width: 25,
@@ -379,7 +380,7 @@ class _BottomScreenState extends State<BottomScreen> {
             onTap: () {
               Navigator.push(
                 context,
-                MaterialPageRoute(builder: (context) => PrivacyPolicy()),
+                MaterialPageRoute(builder: (context) => ContactUsScreen()),
               );
             },
           ),

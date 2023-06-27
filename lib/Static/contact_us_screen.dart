@@ -36,7 +36,7 @@ class _ContactUsScreenState extends State<ContactUsScreen> {
     var headers = {
       'Cookie': 'ci_session=0972dd56b7dcbe1d24736525bf2ee593c03d46de'
     };
-    var request = http.Request('GET', Uri.parse('${ApiService.getPrivacyPolicyApi}'));
+    var request = http.Request('GET', Uri.parse('${ApiService.getContactUsApi}'));
     request.headers.addAll(headers);
     http.StreamedResponse response = await request.send();
     if (response.statusCode == 200) {

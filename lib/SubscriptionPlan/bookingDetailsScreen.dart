@@ -42,12 +42,9 @@ class _BookingDetailsScreenState extends State<BookingDetailsScreen> {
     _razorpay?.on(Razorpay.EVENT_PAYMENT_ERROR, _handlePaymentError);
     _razorpay?.on(Razorpay.EVENT_EXTERNAL_WALLET, _handleExternalWallet);
     getPromoCodeApi();
+    genratePaytmApi();
 
   }
-  getUser(){
-
-  }
-
 
   getplanPurchaseSuccessApi() async {
     SharedPreferences preferences = await SharedPreferences.getInstance();
@@ -73,7 +70,7 @@ class _BookingDetailsScreenState extends State<BookingDetailsScreen> {
       "parking":widget.parking.toString(),
       "landmark":widget.landMark.toString(),
       "coupon_code": promocouponC.text,
-      "discount":finalTotal,
+      "discount":finalTotal.toString(),
       "subtotal": widget.amount.toString()
 
     });
@@ -122,28 +119,61 @@ class _BookingDetailsScreenState extends State<BookingDetailsScreen> {
   void _handleExternalWallet(ExternalWalletResponse response) {
   }
 
+  // String mid = "1", orderId = "1", amount = "100", txnToken = "";
+  // String result = "1";
+  // bool isStaging = false;
+  // bool isApiCallInprogress = false;
+  // String callbackUrl = "" ;
+  // bool restrictAppInvoke = false;
+  // bool enableAssist = true;
 
-  String mid = "1", orderId = "1", amount = "100", txnToken = "";
-  String result = "1";
-  bool isStaging = false;
-  bool isApiCallInprogress = false;
-  String callbackUrl = "https://paytm.com/";
-  bool restrictAppInvoke = false;
-  bool enableAssist = true;
-
-
+  var contactUs;
+  var privacyPolicyTitle;
   TextEditingController promocouponC =  TextEditingController();
+    var linkPaytm;
+    var midPaytm;
     var finalTotal;
     var disCountAmount;
     String? couponCode;
     bool changePrice = false;
+    genratePaytmApi() async {
+      SharedPreferences preferences =  await  SharedPreferences.getInstance();
+      String? userId = preferences.getString('userId');
+      var headers = {
+        'Cookie': 'ci_session=99749a41e7b75ea164826fc3f427082d5d8d9b39'
+      };
+      var request = http.MultipartRequest('POST', Uri.parse('${ApiService.getGeneratePaytmApi}'));
+      request.fields.addAll({
+        'amount': changePrice ? disCountAmount:widget.amount,
+        'order_id': '2000',
+        'user_id': userId.toString()
+      });
+      request.headers.addAll(headers);
+      http.StreamedResponse response = await request.send();
+      if (response.statusCode == 200) {
+        final result =  await response.stream.bytesToString();
+        final jsonResponse = json.decode(result);
+        setState(() {
+          linkPaytm = jsonResponse['body']['callbackUrl'];
+          midPaytm = jsonResponse['body']['mid'];
+        });
+        print('_____sdsdsdsads_____${linkPaytm}_________');
+      }
+      else {
+      print(response.reasonPhrase);
+      }
+
+
+    }
   checkPromoCode() async {
+    SharedPreferences preferences = await SharedPreferences.getInstance();
+    String? userId = preferences.getString('userId');
     var headers = {
       'Cookie': 'ci_session=0cb9ee2fd0d29a541816f5fd12f9e0cb40f01025'
     };
     var request = http.MultipartRequest('POST', Uri.parse('${ApiService.checkPromoCodeApi}'));
     request.fields.addAll({
-
+       'user_id':userId.toString(),
       'code':promocouponC.text,
       'amount': widget.amount.toString()
     });
@@ -258,8 +288,8 @@ class _BookingDetailsScreenState extends State<BookingDetailsScreen> {
                     padding: const EdgeInsets.only(left: 5,right: 5,top: 5),
                     child: InkWell(
                       onTap: (){
-                        // print('xcscsfsfsdfsdxcscsfsfsdfsd');
-                        // _startTransaction();
+                        print('xcscsfsfsdfsdxcscsfsfsdfsd');
+                        // initiateTransaction(linkPaytm);
                         if(changePrice){
                           openCheckout(disCountAmount);
                         }else{
@@ -309,46 +339,81 @@ class _BookingDetailsScreenState extends State<BookingDetailsScreen> {
     );
 
   }
-
-  _startTransaction() async {
-    // if (txnToken.isEmpty) {
-    //   return;
-    // }
-    var sendMap = <String, dynamic>{
-      "mid": mid,
-      "orderId": " ",
-      "amount": 100,
-      "txnToken": txnToken,
-      "callbackUrl": callbackUrl,
-      "restrictAppInvoke": restrictAppInvoke,
-      "enableAssist": enableAssist
-    };
-    print(sendMap);
+  initiateTransaction(
+      // String orderId, double amount,
+      // String txnToken,
+      String callBackUrl
+      ) async {
+    String result = '';
     try {
-      var response = AllInOneSdk.startTransaction(mid, orderId, amount,
-          txnToken, callbackUrl,  restrictAppInvoke, enableAssist);
+      var response = AllInOneSdk.startTransaction(
+        midPaytm,
+        "1",
+        widget.amount.toString(),
+        "txnToken",
+        linkPaytm,
+        false, // isStaging
+        false, // restrictAppInvoke
+      );
       response.then((value) {
-        print("surebdra=============>${value}");
-        setState(() {
-          result = value.toString();
-        });
+        // Transaction successfull
+        print(value);
       }).catchError((onError) {
         if (onError is PlatformException) {
-          setState(() {
-            result = onError.message.toString() +
-                " \n  " +
-                onError.details.toString();
-          });
+          result = onError.message! + " \n  " + onError.details.toString();
+          print(result);
         } else {
-          setState(() {
-            result = onError.toString();
-          });
+          result = onError.toString();
+          print(result);
         }
       });
     } catch (err) {
+      // Transaction failed
       result = err.toString();
+      print(result);
     }
   }
+
+
+  // _startTransaction() async {
+  //   // if (txnToken.isEmpty) {
+  //   //   return;
+  //   // }
+  //   var sendMap = <String, dynamic>{
+  //     "mid":mid,
+  //     "orderId": " ",
+  //     "amount": changePrice ? disCountAmount :widget.amount,
+  //     "txnToken": txnToken,
+  //     "callbackUrl": linkPaytm,
+  //     "restrictAppInvoke": restrictAppInvoke,
+  //     "enableAssist": enableAssist
+  //   };
+  //   print(sendMap);
+  //   try {
+  //     var response = AllInOneSdk.startTransaction(mid, orderId, amount,
+  //         txnToken, callbackUrl, restrictAppInvoke, enableAssist);
+  //     response.then((value) {
+  //       print("surebdra=============>${value}");
+  //       setState(() {
+  //         result = value.toString();
+  //       });
+  //     }).catchError((onError) {
+  //       if (onError is PlatformException) {
+  //         setState(() {
+  //           result = onError.message.toString() +
+  //               " \n  " +
+  //               onError.details.toString();
+  //         });
+  //       } else {
+  //         setState(() {
+  //           result = onError.toString();
+  //         });
+  //       }
+  //     });
+  //   } catch (err) {
+  //     result = err.toString();
+  //   }
+  // }
   vehicleDetails(){
     return Container(
       width: double.infinity,

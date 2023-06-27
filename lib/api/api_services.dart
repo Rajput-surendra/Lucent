@@ -22,7 +22,7 @@ class ApiService {
   static const String getSubsriptionApi = baseUrl+'subscription_plans';
   static const String getSubsriptionListApi = baseUrl+'subscribed_plans';
   static const String getPrivacyPolicyApi = baseUrl+'static_pages/privacy-policy';
-  static const String getApi = baseUrl+'static_pages/contact-us';
+  static const String getContactUsApi = baseUrl+'static_pages/contact-us';
   static const String getTermsConditionsApi = baseUrl+'static_pages/terms-conditions';
   static const String getTimeSlotApi = baseUrl+'time_slots';
   static const String getStaticServiceApi = baseUrl+'general_setting1';
@@ -30,6 +30,7 @@ class ApiService {
   static const String getCitySubApi = baseUrl+'get_cities';
   static const String checkPromoCodeApi = baseUrl+'check_promo_code';
   static const String getPromoCodeApi = baseUrl+'get_promo_code';
+  static const String getGeneratePaytmApi = baseUrl+'generate_paytm_txn_token';
 
 
 

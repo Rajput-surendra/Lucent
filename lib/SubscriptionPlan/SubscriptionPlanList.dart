@@ -84,10 +84,23 @@ class _SubscriptionPlanScreenState extends State<SubscriptionPlanScreen> {
                       ),
                       SizedBox(height: 60,),
                       Padding(
-                        padding: const EdgeInsets.all(8.0),
-                        child: Text("₹ ${subscribedPlansListModel!.data![i].amount}",style: TextStyle(color: colors.secondary,fontWeight: FontWeight.bold,fontSize: 20,
+                        padding: const EdgeInsets.all(2.0),
+                        child: Text("Sub Total: ₹ ${subscribedPlansListModel!.data![i].subtotal}",style: TextStyle(color: colors.secondary,fontWeight: FontWeight.bold,fontSize: 16,
                           decorationThickness: 2,),),
                       ),
+                      Padding(
+                        padding: const EdgeInsets.all(2.0),
+                        child: Text("Discount: ₹ ${subscribedPlansListModel!.data![i].discount}",style: TextStyle(color: colors.secondary,fontWeight: FontWeight.bold,fontSize: 16,
+                          decorationThickness: 2,),),
+                      ),
+                      Padding(
+                        padding: const EdgeInsets.all(2.0),
+                        child: Text("Total: ₹ ${subscribedPlansListModel!.data![i].amount}",style: TextStyle(color: colors.secondary,fontWeight: FontWeight.bold,fontSize: 20,
+                          decorationThickness: 2,),),
+                      ),
+
+
+
                       Padding(
                         padding: const EdgeInsets.all(8.0),
                         child: Text("${subscribedPlansListModel!.data![i].name}",style: TextStyle(color: colors.secondary,fontWeight: FontWeight.bold,fontSize: 20,
