@@ -61,6 +61,8 @@ dependencies:
 #  image_picker: ^0.7.4
   image_cropper: ^3.0.1
   path_provider: ^2.0.14
+
+  paytm: ^3.0.1
   paytm_allinonesdk: ^1.1.4
   file_picker: ^4.6.1
   video_player: 2.1.15
@@ -71,7 +73,7 @@ dependencies:
   flutter_branch_sdk: ^5.1.1
   flutter_share: ^2.0.0
   image_picker_gallery_camera: ^0.2.2
-#  image_downloader: ^0.31.0
+  #  image_downloader: ^0.31.0
   share_plus: ^4.3.1
   screenshot: ^1.3.0
   flutter_local_notifications: ^9.8.0+1

@@ -14,6 +14,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:http/http.dart' as http;
 import 'package:shared_preferences/shared_preferences.dart';
+import 'package:video_player/video_player.dart';
 
 import '../Accessrioes/AccessoriesDetailsScreen.dart';
 import '../Accessrioes/Accessrioes.dart';
@@ -52,6 +53,15 @@ class HomeScreen extends StatefulWidget {
 }
 
 class _HomeScreenState extends State<HomeScreen> {
+  VideoPlayerController? videoPlayerController;
+
+  bool? isPlaying ;
+  @override
+  void dispose() {
+    // TODO: implement dispose
+    super.dispose();
+    videoPlayerController?.dispose();
+  }
   final GlobalKey<ScaffoldState> _key = GlobalKey();
   SpeciplyData? localFilter;
   int currentindex = 0;
@@ -85,66 +95,6 @@ class _HomeScreenState extends State<HomeScreen> {
       print(response.reasonPhrase);
     }
   }
-
-  // GetUserProfileModel? getprofile;
-  // getuserProfile() async {
-  //   SharedPreferences preferences = await SharedPreferences.getInstance();
-  //   String? userId = preferences.getString('userId');
-  //   print("getProfile--------------->${userId}");
-  //   var headers = {
-  //     'Cookie': 'ci_session=d9075fff59f39b7a82c03ca267be8899c1a9fbf8'
-  //   };
-  //   var request = http.MultipartRequest(
-  //       'POST', Uri.parse('${ApiService.getUserProfile}'));
-  //   request.fields.addAll({'user_id': '$userId'});
-  //   print("getProfile--------------->${request.fields}");
-  //   request.headers.addAll(headers);
-  //
-  //   http.StreamedResponse response = await request.send();
-  //
-  //   if (response.statusCode == 200) {
-  //     var finalResult = await response.stream.bytesToString();
-  //     final jsonResponse =
-  //         GetUserProfileModel.fromJson(json.decode(finalResult));
-  //     print("this is a ========>profile${jsonResponse}");
-  //     print("emailllllll${getprofile?.user?.mobile}");
-  //     setState(() {
-  //       getprofile = jsonResponse;
-  //     });
-  //   } else {
-  //     print(response.reasonPhrase);
-  //   }
-  // }
-
-  // GetSelectCatModel? selectCatModel;
-  // getCatApi() async {
-  //   SharedPreferences preferences = await SharedPreferences.getInstance();
-  //   String? Roll = preferences.getString('roll');
-  //   String? userId = preferences.getString('userId');
-  //   print("getRoll--------------->${Roll}");
-  //
-  //   var headers = {
-  //     'Cookie': 'ci_session=742f7d5e34b7f410d122da02dbbe7e75f06cadc8'
-  //   };
-  //   var request = http.MultipartRequest(
-  //       'POST', Uri.parse('${ApiService.selectCategory}'));
-  //   request.fields.addAll({'roll': '1', 'cat_type': "2", 'user_id': '$userId'});
-  //   print("this is a Response==========>${request.fields}");
-  //   request.headers.addAll(headers);
-  //   http.StreamedResponse response = await request.send();
-  //   if (response.statusCode == 200) {
-  //     //preferences.setString('id', "Id");
-  //     final result = await response.stream.bytesToString();
-  //     final finalResult = GetSelectCatModel.fromJson(jsonDecode(result));
-  //     print('_____Surendra _____${finalResult}_________');
-  //
-  //     setState(() {
-  //       selectCatModel = finalResult;
-  //     });
-  //   } else {
-  //     print(response.reasonPhrase);
-  //   }
-  // }
 
   _CarouselSlider1() {
     return Padding(
@@ -197,10 +147,15 @@ class _HomeScreenState extends State<HomeScreen> {
 
   void initState() {
     super.initState();
+    videoPlayerController = VideoPlayerController.network(
+        "https://alphawizzserver.com/car_wash/uploads/car-vedio.mp4");
+    videoPlayerController!.initialize();
+    videoPlayerController!.setLooping(false);
+    videoPlayerController!.play();
     getAccessoriesApi();
-    print("this is my speiality  ${widget.speciality}");
     Future.delayed(Duration(milliseconds: 300), () {
       return getSliderApi();
+
 
     });
     getSliderApi();
@@ -323,7 +278,7 @@ class _HomeScreenState extends State<HomeScreen> {
         key: _refreshIndicatorKey,
         onRefresh: _refresh,
         child: Scaffold(
-          backgroundColor: colors.whiteScaffold,
+          backgroundColor: colors.whiteTemp,
           key: _key,
           //appBar: customAppBar(context: context, text:"My Dashboard", isTrue: true, ),
           body: SafeArea(
@@ -332,28 +287,7 @@ class _HomeScreenState extends State<HomeScreen> {
                 padding: const EdgeInsets.only(left: 7,right: 5),
                 child: Column(
                   children: [
-                    Column(
-                      // alignment: Alignment.bottomCenter,
-                      children: [
-                        SizedBox(
-                          //height: 200,
-                          width: double.maxFinite,
-                          child: _sliderModel == null
-                              ? const Center(
-                                  child: CircularProgressIndicator(
-                                  color: colors.primary,
-                                ))
-                              : _CarouselSlider1(),
-                        ),
-                        Padding(
-                          padding: const EdgeInsets.only(top: 2),
-                          child: Row(
-                            mainAxisAlignment: MainAxisAlignment.center,
-                            children: _buildDots(),
-                          ),
-                        ),
-                      ],
-                    ),
+                    getSlider(),
                     const SizedBox(
                       height: 5,
                     ),
@@ -367,24 +301,27 @@ class _HomeScreenState extends State<HomeScreen> {
                               onTap: (){
                                 Navigator.push(context, MaterialPageRoute(builder: (context)=>StaticScreenService()));
                               },
-                              child: Container(
-                               width:165,
-                                decoration: BoxDecoration(
-                                    color:  colors.primary.withOpacity(0.2),
-                                    borderRadius: BorderRadius.circular(10)
-                                ),
-                                height: 170,
-                                child: Column(
-                                  children: [
-                                    Image.asset("assets/splash/service.png",height: 120,width: 100,),
-                                    Text("Service",style: TextStyle(color: colors.primary,fontWeight: FontWeight.bold))
-                                  ],
+                              child: Card(
+                                shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(10)),
+                                elevation: 5,
+                                child: Container(
+                                  decoration: BoxDecoration(
+                                      color:  colors.whiteTemp,
+                                      borderRadius: BorderRadius.circular(10)
+                                  ),
+                                  height: 160,
+                                  child: Column(
+                                    children: [
+                                      Image.asset("assets/splash/service.png",height: 120,width: 100,),
+                                      Text("Service",style: TextStyle(color: colors.primary,fontWeight: FontWeight.bold))
+                                    ],
+                                  ),
                                 ),
                               ),
                             ),
                           ),
                           SizedBox(
-                            width: 10,
+                            width: 5,
                           ),
                           Expanded(
                             child: InkWell(
@@ -392,18 +329,22 @@ class _HomeScreenState extends State<HomeScreen> {
                                 // Navigator.push(context, MaterialPageRoute(builder: (context)=>BrandScreen()));
                                 Navigator.push(context, MaterialPageRoute(builder: (context)=>Accessories()));
                               },
-                              child: Container(
-                                // width:165,
-                                decoration: BoxDecoration(
-                                    color:  colors.primary.withOpacity(0.2),
-                                    borderRadius: BorderRadius.circular(10)
-                                ),
-                                height: 170,
-                                child: Column(
-                                  children: [
-                                    Image.asset("assets/splash/asse.png",height: 120,width: 100),
-                                    Text("Accessories",style: TextStyle(color: colors.primary,fontWeight: FontWeight.bold))
-                                  ],
+                              child: Card(
+                                shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(10)),
+                                elevation: 5,
+                                child: Container(
+                                  // width:165,
+                                  decoration: BoxDecoration(
+                                      color:  colors.whiteTemp,
+                                      borderRadius: BorderRadius.circular(10)
+                                  ),
+                                  height: 160,
+                                  child: Column(
+                                    children: [
+                                      Image.asset("assets/splash/asse.png",height: 120,width: 100),
+                                      Text("Accessories",style: TextStyle(color: colors.primary,fontWeight: FontWeight.bold))
+                                    ],
+                                  ),
                                 ),
                               ),
                             ),
@@ -412,7 +353,45 @@ class _HomeScreenState extends State<HomeScreen> {
                       ),
                     ),
                     getStaticWidget(),
-                    SizedBox(height: 10,)
+                    SizedBox(height: 10,),
+                    carStaticWidget(),
+                   Padding(
+                     padding: const EdgeInsets.all(8.0),
+                     child: Container(
+                       height: 200,
+
+                  decoration: BoxDecoration(borderRadius: BorderRadius.circular(20),color: colors.whiteTemp),
+                  child: Stack(
+                      fit: StackFit.expand,
+                      children: [
+                        AspectRatio(
+                          aspectRatio: videoPlayerController!.value.aspectRatio,
+                          child: VideoPlayer(videoPlayerController!),
+                        ),
+                        Positioned(
+                            left: 0,
+                            right: 0,
+                            top: 0,
+                            bottom: 0,
+                            child: InkWell(
+                                onTap: (){
+                                  if (videoPlayerController!.value.isPlaying){
+                                    videoPlayerController!.pause();
+                                    isPlaying =false ;
+                                  }else{
+                                    isPlaying = true;
+                                    videoPlayerController!.play();
+                                  }
+                                  setState(() {
+
+                                  });
+                                },
+                                child: Icon(isPlaying ?? true ?Icons.pause  : Icons.play_arrow , color: Colors.white)))
+                      ],),
+                ),
+                   ),
+                    SizedBox(height: 10,),
+
                     // Padding(
                     //   padding: const EdgeInsets.all(8.0),
                     //   child: Column(
@@ -505,95 +484,349 @@ class _HomeScreenState extends State<HomeScreen> {
     }
     return dots;
   }
+
+  getSlider(){
+    return  Column(
+      // alignment: Alignment.bottomCenter,
+      children: [
+        SizedBox(
+          //height: 200,
+          width: double.maxFinite,
+          child: _sliderModel == null
+              ? const Center(
+              child: CircularProgressIndicator(
+                color: colors.primary,
+              ))
+              : _CarouselSlider1(),
+        ),
+        Padding(
+          padding: const EdgeInsets.only(top: 2),
+          child: Row(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: _buildDots(),
+          ),
+        ),
+      ],
+    );
+  }
   getStaticWidget(){
     return  Padding(
       padding: const EdgeInsets.only(left: 10,right: 10),
-      child: Container(
-        height: MediaQuery.of(context).size.height/2.0,
-        child: Column(
-          children: [
-            Container(
-              height: MediaQuery.of(context).size.width/3,
-              child: Row(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+      child: Column(
+        children: [
+          Row(
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            children: [
+              Center(child:
+              Container(
+                  child: Image.asset("assets/images/settingHome.png"))),
+              Column(
+                mainAxisAlignment: MainAxisAlignment.center,
+                crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  Center(child:
-                  Container(
-                      child: Image.asset("assets/images/settingHome.png"))),
-                  Column(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      SizedBox(height: 8,),
-                      Text("Select Your Service",style: TextStyle(fontSize: 18,fontWeight: FontWeight.w500,
-                          color:  colors.primary
-                      ),),
-                      SizedBox(height: 3,),
-                      Text("Select the service you wish to desire",style: TextStyle(fontSize: 14),),
-                      Text("Home Cleaning or Washroom Cleaning",style: TextStyle(fontSize: 14.3),),
-                    ],
-                  ),
+                  Text("Select Your Service",style: TextStyle(fontSize: 18,fontWeight: FontWeight.w500,
+                      color:  colors.primary
+                  ),),
+                  SizedBox(height: 3,),
+                  Text("Select the service you wish to desire",style: TextStyle(fontSize: 14),),
+                  Text("Home Cleaning or Washroom Cleaning",style: TextStyle(fontSize: 14.3),),
                 ],
               ),
-            ),
-            Container(
-              height: MediaQuery.of(context).size.width/3,
-              child: Row(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            ],
+          ),
+          SizedBox(height: 10,),
+          Row(
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            children: [
+              Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      SizedBox(height: 25,),
-                      Text("Choose Your Time Slot",style: TextStyle(fontSize: 18,fontWeight: FontWeight.w500,
-                        color:  colors.primary
-                      ),
-                      ),
-                      SizedBox(height: 3,),
-                      Text("Choose from the available time slots and\n confirm  the booking."),
-                      // Padding(
-                      //   padding: const EdgeInsets.only(right: 50),
-                      //   child: Text(""),
-                      // ),
-                    ],
+                  SizedBox(height: 10,),
+                  Text("Choose Your Time Slot",style: TextStyle(fontSize: 18,fontWeight: FontWeight.w500,
+                    color:  colors.primary
                   ),
-                  SizedBox(width: 5,),
-                  Image.asset("assets/images/timeslot.png"),
+                  ),
+                  SizedBox(height: 3,),
+                  Text("Choose from the available time slots and\n confirm  the booking."),
+                  // Padding(
+                  //   padding: const EdgeInsets.only(right: 50),
+                  //   child: Text(""),
+                  // ),
                 ],
               ),
-            ),
-
-            Container(
-              height: MediaQuery.of(context).size.width/3,
-              child: Row(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                children: [
-                  Padding(
-                    padding: const EdgeInsets.only(top: 0),
-                    child: Image.asset("assets/images/hassle.png"),
-                  ),
-                  Padding(
-                    padding: const EdgeInsets.only(top: 20),
-                    child: Column(
-                      // mainAxisAlignment: MainAxisAlignment.center,
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-                        Text("Hassel-Free Service",style: TextStyle(fontSize: 18,fontWeight: FontWeight.w500,
-                            color: colors.primary
-                        ),),
-                        SizedBox(height: 3,),
-                        Text("Once booking is confirmed, our \n professional will visit at your doorstep  \n will serve you ",style: TextStyle(fontSize: 14),),
-
-                      ],
-                    ),
-                  ),
-                ],
+              SizedBox(width: 5,),
+              Image.asset("assets/images/timeslot.png"),
+            ],
+          ),
+          SizedBox(height: 10,),
+          Row(
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            children: [
+              Padding(
+                padding: const EdgeInsets.only(top: 0),
+                child: Image.asset("assets/images/hassle.png"),
               ),
-            ),
+              Padding(
+                padding: const EdgeInsets.only(top: 0),
+                child: Column(
+                  // mainAxisAlignment: MainAxisAlignment.center,
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Text("Hassel-Free Service",style: TextStyle(fontSize: 18,fontWeight: FontWeight.w500,
+                        color: colors.primary
+                    ),),
+                    SizedBox(height: 3,),
+                    Text("Once booking is confirmed, our \n professional will visit at your doorstep  \n will serve you ",style: TextStyle(fontSize: 14),),
 
-          ],
-        ),
+                  ],
+                ),
+              ),
+            ],
+          ),
+
+        ],
       ),
+    );
+  }
+  carStaticWidget(){
+    return Column(
+      children: [
+        InkWell(
+          onTap: (){
+            Navigator.push(context, MaterialPageRoute(builder: (context)=>StaticScreenService()));
+          },
+          child: Card(
+            shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(10)),
+            elevation: 3,
+            child: Container (
+                decoration: BoxDecoration(
+                    color: colors.whiteTemp,
+                    borderRadius: BorderRadius.circular(10)
+                ),
+                height: 150,
+                // width: 200,
+                // height: 200,
+                child: Row(
+                  children: [
+                    Padding(
+                      padding: const EdgeInsets.all(8.0),
+                      child: ClipRRect(
+                          borderRadius: BorderRadius.circular(10),
+                          child: Container(
+                              color: colors.darkIcon,
+                              height: 120,
+                              width: 120,
+                              child: Padding(
+                                padding: const EdgeInsets.all(2.0),
+                                child: ClipRRect(
+                                    borderRadius: BorderRadius.circular(10),
+                                    child: Image.asset("assets/splash/car5.png",fit: BoxFit.fill,)),
+                              ))),
+                    ),
+                    Text(" Waterless Cleaning",style: TextStyle(color: colors.blackTemp,fontWeight: FontWeight.bold),)
+                  ],
+                )
+            ),
+          ),
+        ),
+        SizedBox(height: 10,),
+        InkWell(
+          onTap: (){
+            Navigator.push(context, MaterialPageRoute(builder: (context)=>StaticScreenService()));
+          },
+          child: Card(
+            shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(10)),
+            elevation: 3,
+            child: Container (
+                decoration: BoxDecoration(
+                    color: colors.whiteTemp,
+                    borderRadius: BorderRadius.circular(10)
+                ),
+                height: 150,
+                // width: 200,
+                // height: 200,
+                child: Row(
+                  children: [
+                    Padding(
+                      padding: const EdgeInsets.all(8.0),
+                      child: ClipRRect(
+                          borderRadius: BorderRadius.circular(10),
+                          child: Container(
+                              color: colors.darkIcon,
+                              height: 120,
+                              width: 120,
+                              child: Padding(
+                                padding: const EdgeInsets.all(2.0),
+                                child: ClipRRect(
+                                    borderRadius: BorderRadius.circular(10),
+                                    child: Image.asset("assets/splash/car4.png",fit: BoxFit.fill,)),
+                              ))),
+                    ),
+                    Text("Monthly Deep Cleaning",style: TextStyle(color: colors.blackTemp,fontWeight: FontWeight.bold),)
+                  ],
+                )
+            ),
+          ),
+        ),
+        SizedBox(height: 10,),
+        InkWell(
+          onTap: (){
+            Navigator.push(context, MaterialPageRoute(builder: (context)=>StaticScreenService()));
+          },
+          child: Card(
+            shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(10)),
+            elevation: 3,
+            child: Container (
+                decoration: BoxDecoration(
+                    color: colors.whiteTemp,
+                    borderRadius: BorderRadius.circular(10)
+                ),
+                height: 150,
+                // width: 200,
+                // height: 200,
+                child: Row(
+                  children: [
+                    Padding(
+                      padding: const EdgeInsets.all(8.0),
+                      child: ClipRRect(
+                          borderRadius: BorderRadius.circular(10),
+                          child: Container(
+                              color: colors.darkIcon,
+                              height: 120,
+                              width: 120,
+                              child: Padding(
+                                padding: const EdgeInsets.all(2.0),
+                                child: ClipRRect(
+                                    borderRadius: BorderRadius.circular(10),
+                                    child: Image.asset("assets/splash/car3.png",fit: BoxFit.fill,)),
+                              ))),
+                    ),
+                    Text("Monthly Engine Cleaning ",style: TextStyle(color: colors.blackTemp,fontWeight: FontWeight.bold),)
+                  ],
+                )
+            ),
+          ),
+        ),
+        SizedBox(height: 10,),
+        InkWell(
+          onTap: (){
+            Navigator.push(context, MaterialPageRoute(builder: (context)=>StaticScreenService()));
+          },
+          child: Card(
+            shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(10)),
+            elevation: 3,
+            child: Container (
+                decoration: BoxDecoration(
+                    color: colors.whiteTemp,
+                    borderRadius: BorderRadius.circular(10)
+                ),
+                height: 150,
+                // width: 200,
+                // height: 200,
+                child: Row(
+                  children: [
+                    Padding(
+                      padding: const EdgeInsets.all(8.0),
+                      child: ClipRRect(
+                          borderRadius: BorderRadius.circular(10),
+                          child: Container(
+                              color: colors.darkIcon,
+                              height: 120,
+                              width: 120,
+                              child: Padding(
+                                padding: const EdgeInsets.all(2.0),
+                                child: ClipRRect(
+                                  borderRadius: BorderRadius.circular(10),
+                                    child: Image.asset("assets/splash/car2.png",fit: BoxFit.fill,)),
+                              ))),
+                    ),
+                    Text("Monthly Interior Cleaning",style: TextStyle(color: colors.blackTemp,fontWeight: FontWeight.bold),)
+                  ],
+                )
+            ),
+          ),
+        ),
+        SizedBox(height: 10,),
+        InkWell(
+          onTap: (){
+            Navigator.push(context, MaterialPageRoute(builder: (context)=>StaticScreenService()));
+          },
+          child: Card(
+            shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(10)),
+            elevation: 3,
+            child: Container (
+                decoration: BoxDecoration(
+                    color: colors.whiteTemp,
+                    borderRadius: BorderRadius.circular(10)
+                ),
+                height: 150,
+                // width: 200,
+                // height: 200,
+                child: Row(
+                  children: [
+                    Padding(
+                      padding: const EdgeInsets.all(8.0),
+                      child: ClipRRect(
+                          borderRadius: BorderRadius.circular(10),
+                          child: Container(
+                              color: colors.darkIcon,
+                              height: 120,
+                              width: 120,
+                              child: Padding(
+                                padding: const EdgeInsets.all(2.0),
+                                child: ClipRRect(
+                                    borderRadius: BorderRadius.circular(10),
+                                    child: Image.asset("assets/splash/car1.png",fit: BoxFit.fill,)),
+                              ))),
+                    ),
+                    Text("Weekly Glass Cleaner liquid \n Top-up",style: TextStyle(color: colors.blackTemp,fontWeight: FontWeight.bold),)
+                  ],
+                )
+            ),
+          ),
+        ),
+        SizedBox(height: 10,),
+        InkWell(
+          onTap: (){
+            Navigator.push(context, MaterialPageRoute(builder: (context)=>StaticScreenService()));
+          },
+          child: Card(
+            shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(10)),
+            elevation: 3,
+            child: Container (
+                decoration: BoxDecoration(
+                    color: colors.whiteTemp,
+                    borderRadius: BorderRadius.circular(10)
+                ),
+                height: 150,
+                // width: 200,
+                // height: 200,
+                child: Row(
+                  children: [
+                    Padding(
+                      padding: const EdgeInsets.all(8.0),
+                      child: ClipRRect(
+                          borderRadius: BorderRadius.circular(10),
+                          child: Container(
+                              color: colors.darkIcon,
+                              height: 120,
+                              width: 120,
+                              child: Padding(
+                                padding: const EdgeInsets.all(2.0),
+                                child: ClipRRect(
+                                    borderRadius: BorderRadius.circular(10),
+                                    child: Image.asset("assets/splash/car.png",fit: BoxFit.fill,)),
+                              ))),
+                    ),
+                    Text("Weekly Car Exterior Polishing",style: TextStyle(color: colors.blackTemp,fontWeight: FontWeight.bold),)
+                  ],
+                )
+            ),
+          ),
+        ),
+        SizedBox(height: 10,),
+
+      ],
     );
   }
 

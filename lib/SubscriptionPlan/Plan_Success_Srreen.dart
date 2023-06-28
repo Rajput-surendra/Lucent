@@ -26,7 +26,8 @@ class _PlanSuccessScreenState extends State<PlanSuccessScreen> {
               SizedBox(height: 50,),
               Center(child: Image.asset("assets/subcrption.png",scale: 1.2,)),
               SizedBox(height: 30,),
-              Text("Plan Purchased Successfully",style: TextStyle(fontSize: 20,color: colors.primary,),),
+              Text("Congrats! You saved approx 2100-2500\n Ltr.(Monthly) Water by\n Choosing Waterless Cleaning",
+              style: TextStyle(fontSize: 20,color: colors.primary,),),
               //Text("Your order will be delivered tomorrow",style: TextStyle(fontSize: 20,color: colors.primary,),),
               SizedBox(height: 30,),
               Container(

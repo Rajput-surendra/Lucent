@@ -64,7 +64,8 @@ extension colors on ColorScheme {
   Color get simmerHigh =>
       this.brightness == Brightness.dark ? darkColor : Colors.grey[100]!;
 
-  static Color darkIcon = Color(0xffEEF3F9);
+  static Color darkIcon = Color(0xffFFFFFF);
+  static Color darkIcon1 = Color(0xffEEF3F9);
 
   static const Color grad1Color = Color(0xff1497B1);
   static const Color grad2Color = Color(0xff1497B1);

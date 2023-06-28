@@ -262,7 +262,7 @@ class _SubmitFromScreenState extends State<SubmitFromScreen> {
                          height: 55,
                          decoration: BoxDecoration(
                              color:
-                             colors.darkIcon,
+                             colors.darkIcon1,
                              borderRadius: BorderRadius.circular(10)
                          ),
                          child: TextFormField(
@@ -304,7 +304,7 @@ class _SubmitFromScreenState extends State<SubmitFromScreen> {
                          height: 55,
                          decoration: BoxDecoration(
                              color:
-                             colors.darkIcon,
+                             colors.darkIcon1,
                              borderRadius: BorderRadius.circular(10)
                          ),
                          child: TextFormField(
@@ -353,7 +353,7 @@ class _SubmitFromScreenState extends State<SubmitFromScreen> {
                          width: MediaQuery.of(context).size.width/1.0,
 
                          decoration: BoxDecoration(
-                           color: colors.darkIcon,
+                           color: colors.darkIcon1,
                            borderRadius: BorderRadius.circular(10),
 
                          ),
@@ -447,7 +447,7 @@ class _SubmitFromScreenState extends State<SubmitFromScreen> {
                        Text("Load!!!"):   Container(
                          width: MediaQuery.of(context).size.width/1.0,
                          decoration: BoxDecoration(
-                           color:colors.darkIcon,
+                           color:colors.darkIcon1,
                            borderRadius: BorderRadius.circular(10),
 
                          ),
@@ -544,7 +544,7 @@ class _SubmitFromScreenState extends State<SubmitFromScreen> {
                          height: 55,
                          decoration: BoxDecoration(
                              color:
-                             colors.darkIcon,
+                             colors.darkIcon1,
                              borderRadius: BorderRadius.circular(10)
                          ),
                          child: TextFormField(
@@ -590,7 +590,7 @@ class _SubmitFromScreenState extends State<SubmitFromScreen> {
                          height: 55,
                          decoration: BoxDecoration(
                              color:
-                             colors.darkIcon,
+                             colors.darkIcon1,
                              borderRadius: BorderRadius.circular(10)
                          ),
                          child: TextFormField(
@@ -635,7 +635,7 @@ class _SubmitFromScreenState extends State<SubmitFromScreen> {
                          height: 55,
                          decoration: BoxDecoration(
                              color:
-                             colors.darkIcon,
+                             colors.darkIcon1,
                              borderRadius: BorderRadius.circular(10)
                          ),
                          child: TextFormField(
@@ -696,7 +696,7 @@ class _SubmitFromScreenState extends State<SubmitFromScreen> {
                                    padding: EdgeInsets.symmetric(horizontal: 5),
                                    margin: EdgeInsets.only(right: 10),
                                    decoration: BoxDecoration(
-                                     color: selectedTime == getTimeModel!.data![i].slot ? colors.primary : colors.darkIcon,
+                                     color: selectedTime == getTimeModel!.data![i].slot ? colors.primary : colors.darkIcon1,
                                      // width: selectedTime == timeList[i] ? 2 :1
 
                                      borderRadius: BorderRadius.circular(9),
@@ -751,7 +751,7 @@ class _SubmitFromScreenState extends State<SubmitFromScreen> {
                           height: 55,
                           decoration: BoxDecoration(
                               color:
-                              colors.darkIcon,
+                              colors.darkIcon1,
                               borderRadius: BorderRadius.circular(10)
                           ),
                           child: TextFormField(
@@ -796,7 +796,7 @@ class _SubmitFromScreenState extends State<SubmitFromScreen> {
                           height: 55,
                           decoration: BoxDecoration(
                               color:
-                              colors.darkIcon,
+                              colors.darkIcon1,
                               borderRadius: BorderRadius.circular(10)
                           ),
                           child: TextFormField(
@@ -841,7 +841,7 @@ class _SubmitFromScreenState extends State<SubmitFromScreen> {
                           height: 55,
                           decoration: BoxDecoration(
                               color:
-                              colors.darkIcon,
+                              colors.darkIcon1,
                               borderRadius: BorderRadius.circular(10)
                           ),
                           child: TextFormField(
@@ -887,7 +887,7 @@ class _SubmitFromScreenState extends State<SubmitFromScreen> {
                           height: 55,
                           decoration: BoxDecoration(
                               color:
-                              colors.darkIcon,
+                              colors.darkIcon1,
                               borderRadius: BorderRadius.circular(10)
                           ),
                           child: TextFormField(
