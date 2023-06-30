@@ -141,107 +141,80 @@ class _SubscriptionPlanState extends State<SubscriptionPlan> {
     return Scaffold(
       backgroundColor: colors.darkIcon,
       appBar: customAppBar(context: context, text:"Subscription Plan ", isTrue: true, ),
-      body: Column(
-        children: [
-          SizedBox(height: 10,),
-         getPlan == null  || getPlan == "" ?  Center(child: CircularProgressIndicator()):getPlan!.data!.length == 0 ? Center(child: Text("No Data Found!!")):getPlan!.data!.length == 0 ? Center(
-           child:   Text("No Data Found!!")
-         ) :Container(
-           height: MediaQuery.of(context).size.height/1.5,
-            width: double.infinity,
-            child: ListView.builder(
-              physics: NeverScrollableScrollPhysics(),
-                itemCount: getPlan!.data!.length,
-                itemBuilder: (context, int index, ) {
-                  return
-                    InkWell(
-                    onTap: (){
+      body: SingleChildScrollView(
+        child: Column(
+          children: [
+            SizedBox(height: 10,),
+           getPlan == null  || getPlan == "" ?  Center(child: CircularProgressIndicator()):getPlan!.data!.length == 0 ? Center(child: Text("No Data Found!!")):getPlan!.data!.length == 0 ? Center(
+             child:   Text("No Data Found!!")
+           ) :Container(
+             height: MediaQuery.of(context).size.height/1.5,
+              width: double.infinity,
+              child: ListView.builder(
+                physics: NeverScrollableScrollPhysics(),
+                  itemCount: getPlan!.data!.length,
+                  itemBuilder: (context, int index, ) {
+                    return
+                      InkWell(
+                      onTap: (){
 
-                    },
-                    child: Container(
-                      decoration: BoxDecoration(
-                        borderRadius: BorderRadius.circular(10)
-                      ),
-                      width: MediaQuery.of(context).size.width/1.2,
-                      child: Padding(
-                        padding: const EdgeInsets.all(8.0),
-                        child: Card(
-                          shape: RoundedRectangleBorder(
-                            borderRadius: BorderRadius.circular(20)
-                          ),
-                          elevation: 5,
-                          child: Column(
-                            children: [
-                              Row(
-                                crossAxisAlignment: CrossAxisAlignment.start,
-                                mainAxisAlignment: MainAxisAlignment.start,
-                                children: [
-                                  Padding(
-                                    padding: const EdgeInsets.all(8.0),
-                                    child: Container(
-                                      height: 130,
-                                       width:130,
-                                        child: Image.asset("assets/subcrption.png",fit: BoxFit.fill,)),
-                                  ),
-                                  Padding(
-                                    padding: const EdgeInsets.only(top: 30,left: 5),
-                                    child: Column(
-                                      crossAxisAlignment: CrossAxisAlignment.start,
-                                      mainAxisAlignment: MainAxisAlignment.start,
-                                      children: [
-
-                                        Container(
-                                          width: 180,
-                                          child: Text(
-                                            "${getPlan!.data![index].title}",
-                                            maxLines: 1,
-                                            style: TextStyle(fontWeight: FontWeight.bold, fontSize: 20,color: colors.blackTemp,overflow: TextOverflow.ellipsis,),
-                                          ),
-                                        ),
-                                        SizedBox(height: 5,),
-                                        Text("₹ ${getPlan!.data![index].amount}",style: TextStyle(color: colors.secondary,fontWeight: FontWeight.bold,fontSize: 18,
-                                        ),),
-                                        SizedBox(height: 5),
-                                        Text( "${getPlan!.data![index].timeText}",style: TextStyle(color: colors.blackTemp),),
-                                        SizedBox(height: 5),
-                                        Text( "${getPlan!.data![index].vehicleType}",style: TextStyle(color: colors.blackTemp),),
-                                      ],
+                      },
+                      child: Container(
+                        decoration: BoxDecoration(
+                          borderRadius: BorderRadius.circular(10)
+                        ),
+                        width: MediaQuery.of(context).size.width/1.2,
+                        child: Padding(
+                          padding: const EdgeInsets.all(8.0),
+                          child: Card(
+                            shape: RoundedRectangleBorder(
+                              borderRadius: BorderRadius.circular(20)
+                            ),
+                            elevation: 5,
+                            child: Column(
+                              children: [
+                                Row(
+                                  crossAxisAlignment: CrossAxisAlignment.start,
+                                  mainAxisAlignment: MainAxisAlignment.start,
+                                  children: [
+                                    Padding(
+                                      padding: const EdgeInsets.all(8.0),
+                                      child: Container(
+                                        height: 130,
+                                         width:130,
+                                          child: Image.asset("assets/subcrption.png",fit: BoxFit.fill,)),
                                     ),
-                                  )
-                                ],
-                              ),
-                                SizedBox(height: 20,),
+                                    Padding(
+                                      padding: const EdgeInsets.only(top: 30,left: 5),
+                                      child: Column(
+                                        crossAxisAlignment: CrossAxisAlignment.start,
+                                        mainAxisAlignment: MainAxisAlignment.start,
+                                        children: [
 
-                              getPlan!.data![index].isPurchased == true ? Padding(
-                                padding: const EdgeInsets.only(left: 20,right: 20),
-                                child: Container(
-                                  height: 45,
-                                  width: double.infinity,
-                                  decoration: BoxDecoration(
-                                      gradient: LinearGradient(
-                                        begin: Alignment.topRight,
-                                        end: Alignment.bottomLeft,
-                                        stops: [0.1, 0.7,],
-                                        colors: [
-                                          colors.secondary,
-                                          colors.secondary
-
+                                          Container(
+                                            width: 180,
+                                            child: Text(
+                                              "${getPlan!.data![index].title}",
+                                              maxLines: 1,
+                                              style: TextStyle(fontWeight: FontWeight.bold, fontSize: 20,color: colors.blackTemp,overflow: TextOverflow.ellipsis,),
+                                            ),
+                                          ),
+                                          SizedBox(height: 5,),
+                                          Text("₹ ${getPlan!.data![index].amount}",style: TextStyle(color: colors.secondary,fontWeight: FontWeight.bold,fontSize: 18,
+                                          ),),
+                                          SizedBox(height: 5),
+                                          Text( "${getPlan!.data![index].timeText}",style: TextStyle(color: colors.blackTemp),),
+                                          SizedBox(height: 5),
+                                          Text( "${getPlan!.data![index].vehicleType}",style: TextStyle(color: colors.blackTemp),),
                                         ],
                                       ),
-                                      //color: colors.secondary,
-                                      borderRadius: BorderRadius.circular(10)
-                                  ),
-                                  child: Center(child: Text("Purchased",style: TextStyle(color: colors.whiteTemp,fontWeight: FontWeight.bold,fontSize: 18),)),
+                                    )
+                                  ],
                                 ),
-                              ):
-                              Padding(
-                                padding: const EdgeInsets.only(left: 20,right: 20),
-                                child: InkWell(
-                                  onTap: (){
-                                    Navigator.push(context, MaterialPageRoute(builder: (context)=>
-                                        SubmitFromScreen(planId:getPlan!.data![index].id ,title: getPlan!.data![index].title,
-                                          amount: getPlan!.data![index].amount,days: getPlan!.data![index].timeText,Purchased: getPlan!.data![index].isPurchased ,brandName: widget.brandName,modelName: widget.brandName,)));
-                                  },
+                                  SizedBox(height: 20,),
+
+                                getPlan!.data![index].isPurchased == true ? Padding(
+                                  padding: const EdgeInsets.only(left: 20,right: 20),
                                   child: Container(
                                     height: 45,
                                     width: double.infinity,
@@ -259,23 +232,52 @@ class _SubscriptionPlanState extends State<SubscriptionPlan> {
                                         //color: colors.secondary,
                                         borderRadius: BorderRadius.circular(10)
                                     ),
-                                    child: Center(child: Text("Book Service",style: TextStyle(color: colors.whiteTemp,fontWeight: FontWeight.bold,fontSize: 18),)),
+                                    child: Center(child: Text("Purchased",style: TextStyle(color: colors.whiteTemp,fontWeight: FontWeight.bold,fontSize: 18),)),
+                                  ),
+                                ):
+                                Padding(
+                                  padding: const EdgeInsets.only(left: 20,right: 20),
+                                  child: InkWell(
+                                    onTap: (){
+                                      Navigator.push(context, MaterialPageRoute(builder: (context)=>
+                                          SubmitFromScreen(planId:getPlan!.data![index].id ,title: getPlan!.data![index].title,
+                                            amount: getPlan!.data![index].amount,days: getPlan!.data![index].timeText,Purchased: getPlan!.data![index].isPurchased ,brandName: widget.brandName,modelName: widget.brandName,)));
+                                    },
+                                    child: Container(
+                                      height: 45,
+                                      width: double.infinity,
+                                      decoration: BoxDecoration(
+                                          gradient: LinearGradient(
+                                            begin: Alignment.topRight,
+                                            end: Alignment.bottomLeft,
+                                            stops: [0.1, 0.7,],
+                                            colors: [
+                                              colors.secondary,
+                                              colors.secondary
+
+                                            ],
+                                          ),
+                                          //color: colors.secondary,
+                                          borderRadius: BorderRadius.circular(10)
+                                      ),
+                                      child: Center(child: Text("Book Service",style: TextStyle(color: colors.whiteTemp,fontWeight: FontWeight.bold,fontSize: 18),)),
+                                    ),
                                   ),
                                 ),
-                              ),
-                              SizedBox(height: 20,),
+                                SizedBox(height: 20,),
 
-                            ],
+                              ],
+                            ),
                           ),
+
+
                         ),
-
-
                       ),
-                    ),
-                  );
-                }),
-          ),
-        ],
+                    );
+                  }),
+            ),
+          ],
+        ),
       ),
     );
   }
