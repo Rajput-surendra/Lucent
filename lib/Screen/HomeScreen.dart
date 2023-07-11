@@ -292,7 +292,7 @@ class _HomeScreenState extends State<HomeScreen> {
                       height: 5,
                     ),
                     Padding(
-                      padding: const EdgeInsets.all(8.0),
+                      padding: const EdgeInsets.all(5.0),
                       child: Row(
                         mainAxisAlignment: MainAxisAlignment.spaceBetween,
                         children: [
@@ -340,6 +340,7 @@ class _HomeScreenState extends State<HomeScreen> {
                                   ),
                                   height: 160,
                                   child: Column(
+
                                     children: [
                                       Image.asset("assets/splash/asse.png",height: 120,width: 100),
                                       Text("Accessories",style: TextStyle(color: colors.primary,fontWeight: FontWeight.bold))
@@ -549,7 +550,7 @@ class _HomeScreenState extends State<HomeScreen> {
                   ),
                   ),
                   SizedBox(height: 3,),
-                  Text(" Choose from the available time slots and\n Confirm the booking."),
+                  Text(" Choose from the available time slots \n And Confirm the booking."),
                   // Padding(
                   //   padding: const EdgeInsets.only(right: 50),
                   //   child: Text(""),
@@ -593,172 +594,180 @@ class _HomeScreenState extends State<HomeScreen> {
   carStaticWidget(){
     return Column(
       children: [
-        Row(
-          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-          children: [
-            InkWell(
-              onTap: (){
-                Navigator.push(context, MaterialPageRoute(builder: (context)=>StaticScreenService()));
-              },
-              child: Column(
-                children: [
-                  Padding(
-                    padding: const EdgeInsets.all(8.0),
-                    child: ClipRRect(
-                        borderRadius: BorderRadius.circular(10),
-                        child: Container(
-                            color: colors.darkIcon,
-                            height: 130,
-                            width: 155,
-                            child: Padding(
-                              padding: const EdgeInsets.all(2.0),
-                              child: ClipRRect(
-                                  borderRadius: BorderRadius.circular(10),
-                                  child: Image.asset("assets/splash/car.jpg",fit: BoxFit.fill,)),
-                            ))),
-                  ),
-                  Text("Waterless Cleaning",style: TextStyle(color: colors.blackTemp,fontWeight: FontWeight.bold,fontSize: 12),)
-                ],
-              ),
-            ),
-            SizedBox(height: 10,),
-            InkWell(
-              onTap: (){
-                Navigator.push(context, MaterialPageRoute(builder: (context)=>StaticScreenService()));
-              },
-              child: Column(
-                children: [
-                  Padding(
-                    padding: const EdgeInsets.all(8.0),
-                    child: Container(
-                        color: colors.darkIcon,
-                        height: 130,
-                        width: 155,
-                        child: Padding(
-                          padding: const EdgeInsets.all(2.0),
-                          child: ClipRRect(
-                              borderRadius: BorderRadius.circular(10),
-                              child: Image.asset("assets/splash/car1.jpg",fit: BoxFit.fill,)),
-                        )),
-                  ),
-                  Text("Monthly Deep Cleaning",style: TextStyle(color: colors.blackTemp,fontWeight: FontWeight.bold,fontSize: 12),)
-                ],
-              ),
-            ),
-          ],
-        ),
-        SizedBox(height: 10,),
-        Row(
-          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-          children: [
-            InkWell(
-              onTap: (){
-                Navigator.push(context, MaterialPageRoute(builder: (context)=>StaticScreenService()));
-              },
-              child: Column(
-                children: [
-                  Padding(
-                    padding: const EdgeInsets.all(8.0),
-                    child: Container(
-                        color: colors.darkIcon,
-                        height: 130,
-                        width: 155,
-                        child: Padding(
-                          padding: const EdgeInsets.all(2.0),
-                          child: ClipRRect(
-                              borderRadius: BorderRadius.circular(10),
-                              child: Image.asset("assets/splash/car3.jpg",fit: BoxFit.fill,)),
-                        )),
-                  ),
-                  Text("Monthly Engine Cleaning",style: TextStyle(color: colors.blackTemp,fontWeight: FontWeight.bold,fontSize: 12),)
-                ],
-              ),
-            ),
-            SizedBox(height: 10,),
-            InkWell(
-              onTap: (){
-                Navigator.push(context, MaterialPageRoute(builder: (context)=>StaticScreenService()));
-              },
-              child: Column(
-                children: [
-                  Padding(
-                    padding: const EdgeInsets.all(8.0),
-                    child: Container(
-                        color: colors.darkIcon,
-                        height: 130,
-                        width: 155,
-                        child: Padding(
-                          padding: const EdgeInsets.all(2.0),
-                          child: ClipRRect(
-                              borderRadius: BorderRadius.circular(10),
-                              child: Image.asset("assets/splash/car5.jpg",fit: BoxFit.fill,)),
-                        )),
-                  ),
-                  Center(child: Text("Monthly Interior Cleaning",style: TextStyle(color: colors.blackTemp,fontWeight: FontWeight.bold,fontSize: 12),))
-                ],
-              ),
-            ),
-
-
-          ],
-        ),
-        Row(
-          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-          children: [
-            InkWell(
-              onTap: (){
-                Navigator.push(context, MaterialPageRoute(builder: (context)=>StaticScreenService()));
-              },
-              child: Column(
-                children: [
-                  Padding(
-                    padding: const EdgeInsets.all(8.0),
-                    child: Container(
-                        color: colors.darkIcon,
-                        height: 130,
-                         width: 155,
-                        child: Padding(
-                          padding: const EdgeInsets.all(2.0),
-                          child: ClipRRect(
-                              borderRadius: BorderRadius.circular(10),
-                              child: Image.asset("assets/splash/car2.jpg",fit: BoxFit.fill,)),
-                        )),
-                  ),
-                  Text("Weekly Car Exterior Polishing ",style: TextStyle(color: colors.blackTemp,fontWeight: FontWeight.bold,fontSize: 12),)
-                ],
-              ),
-            ),
-
-            SizedBox(height: 10,),
-            InkWell(
-              onTap: (){
-                Navigator.push(context, MaterialPageRoute(builder: (context)=>StaticScreenService()));
-              },
-              child: Padding(
-                padding: const EdgeInsets.only(top: 12),
-                child: Column(
-                  children: [
-                    Padding(
-                      padding: const EdgeInsets.all(8.0),
-                      child: ClipRRect(
+        Padding(
+          padding: const EdgeInsets.all(5.0),
+          child: Row(
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            children: [
+              Expanded(
+                child: InkWell(
+                  onTap: (){
+                    Navigator.push(context, MaterialPageRoute(builder: (context)=>StaticScreenService()));
+                  },
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.center,
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: [
+                      ClipRRect(
                           borderRadius: BorderRadius.circular(10),
                           child: Container(
+                            height: 110 ,
                               color: colors.darkIcon,
-                              height: 130,
-                              width: 155,
                               child: Padding(
                                 padding: const EdgeInsets.all(2.0),
                                 child: ClipRRect(
                                     borderRadius: BorderRadius.circular(10),
-                                    child: Image.asset("assets/splash/car4.jpg",fit: BoxFit.fill,)),
+                                    child: Image.asset("assets/splash/car.jpg",fit: BoxFit.fill)),
                               ))),
-                    ),
-                    Text("Weekly Glass Cleaner \n       Liquid Top-up",style: TextStyle(color: colors.blackTemp,fontWeight: FontWeight.bold,fontSize: 12),)
-                  ],
+                      SizedBox(height: 5,),
+                      Center(child: Text("Waterless Cleaning",style: TextStyle(color: colors.blackTemp,fontWeight: FontWeight.bold,fontSize: 11),))
+                    ],
+                  ),
                 ),
               ),
-            ),
-          ],
+              SizedBox(width: 7,),
+
+              Expanded(
+                child: InkWell(
+                  onTap: (){
+                    Navigator.push(context, MaterialPageRoute(builder: (context)=>StaticScreenService()));
+                  },
+                  child: Padding(
+                    padding: const EdgeInsets.only(top: 12),
+                    child: Column(
+                      children: [
+                        Container(
+                            color: colors.darkIcon,
+                            height: 110 ,
+                            width: double.infinity,
+                            child: Padding(
+                              padding: const EdgeInsets.all(2.0),
+                              child: ClipRRect(
+                                  borderRadius: BorderRadius.circular(10),
+                                  child: Image.asset("assets/splash/car1.jpg",fit: BoxFit.fill,)),
+                            )),
+                        SizedBox(height: 5,),
+                        Padding(
+                          padding: const EdgeInsets.only(left: 15),
+                          child: Text("Monthly Deep \n   Cleaning",style: TextStyle(color: colors.blackTemp,fontWeight: FontWeight.bold,fontSize: 11),),
+                        )
+                      ],
+                    ),
+                  ),
+                ),
+              ),
+              SizedBox(width: 7,),
+              Expanded(
+                child: InkWell(
+                  onTap: (){
+                    Navigator.push(context, MaterialPageRoute(builder: (context)=>StaticScreenService()));
+                  },
+                  child: Padding(
+                    padding: const EdgeInsets.only(top: 10),
+                    child: Column(
+                      children: [
+                        Container(
+                            color: colors.darkIcon,
+                            height: 110 ,
+                            child: Padding(
+                              padding: const EdgeInsets.all(2.0),
+                              child: ClipRRect(
+                                  borderRadius: BorderRadius.circular(10),
+                                  child: Image.asset("assets/splash/car3.jpg",fit: BoxFit.fill,)),
+                            )),
+                        SizedBox(height: 5,),
+                        Padding(
+                          padding: const EdgeInsets.only(left: 15),
+                          child: Text("Monthly Engine \n   Cleaning",style: TextStyle(color: colors.blackTemp,fontWeight: FontWeight.bold,fontSize: 11),),
+                        )
+                      ],
+                    ),
+                  ),
+                ),
+              ),
+            ],
+          ),
+        ),
+        Padding(
+          padding: const EdgeInsets.all(5.0),
+          child: Row(
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            children: [
+              Expanded(
+                child: InkWell(
+                  onTap: (){
+                    Navigator.push(context, MaterialPageRoute(builder: (context)=>StaticScreenService()));
+                  },
+                  child: Column(
+                    children: [
+                      Container(
+                          color: colors.darkIcon,
+                          height: 110 ,
+                          child: Padding(
+                            padding: const EdgeInsets.all(2.0),
+                            child: ClipRRect(
+                                borderRadius: BorderRadius.circular(10),
+                                child: Image.asset("assets/splash/car2.jpg",fit: BoxFit.fill,)),
+                          )),
+                      SizedBox(height: 5,),
+                      Text("Weekly Car Exterior\n      Polishing ",style: TextStyle(color: colors.blackTemp,fontWeight: FontWeight.bold,fontSize: 11),)
+                    ],
+                  ),
+                ),
+              ),
+              SizedBox(width: 7,),
+              Expanded(
+                child: InkWell(
+                  onTap: (){
+                    Navigator.push(context, MaterialPageRoute(builder: (context)=>StaticScreenService()));
+                  },
+                  child: Padding(
+                    padding: const EdgeInsets.only(top: 0),
+                    child: Column(
+                      children: [
+                        ClipRRect(
+                            borderRadius: BorderRadius.circular(10),
+                            child: Container(
+                                color: colors.darkIcon,
+                                height: 110 ,
+                                child: Padding(
+                                  padding: const EdgeInsets.all(2.0),
+                                  child: ClipRRect(
+                                      borderRadius: BorderRadius.circular(10),
+                                      child: Image.asset("assets/splash/car4.jpg",fit: BoxFit.fill,)),
+                                ))),  SizedBox(height: 5,),
+
+                        Text("Weekly Glass Cleaner \n        Liquid Top-up",style: TextStyle(color: colors.blackTemp,fontWeight: FontWeight.bold,fontSize: 11),)
+                      ],
+                    ),
+                  ),
+                ),
+              ),
+              SizedBox(width: 7,),
+              Expanded(
+                child: InkWell(
+                  onTap: (){
+                    Navigator.push(context, MaterialPageRoute(builder: (context)=>StaticScreenService()));
+                  },
+                  child: Column(
+                    children: [
+                      Container(
+                          color: colors.darkIcon,
+                          height: 110 ,
+                          child: Padding(
+                            padding: const EdgeInsets.all(2.0),
+                            child: ClipRRect(
+                                borderRadius: BorderRadius.circular(10),
+                                child: Image.asset("assets/splash/car5.jpg",fit: BoxFit.fill,)),
+                          )),
+                      SizedBox(height: 5,),
+                      Center(child: Text("Monthly Interior \n     Cleaning",style: TextStyle(color: colors.blackTemp,fontWeight: FontWeight.bold,fontSize: 11),))
+                    ],
+                  ),
+                ),
+              ),
+            ],
+          ),
         )
 
       ],

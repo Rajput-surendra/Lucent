@@ -4,12 +4,12 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:fluttertoast/fluttertoast.dart';
-import 'package:paytm/paytm.dart';
 import 'package:paytm_allinonesdk/paytm_allinonesdk.dart';
 import 'package:razorpay_flutter/razorpay_flutter.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:paytm_allinonesdk/paytm_allinonesdk.dart';
 import 'package:url_launcher/url_launcher.dart';
+import 'package:webview_flutter/webview_flutter.dart';
 import '../Helper/Appbar.dart';
 import '../Helper/Color.dart';
 import 'package:http/http.dart'as http;
@@ -18,6 +18,7 @@ import '../Helper/Constant.dart';
 import '../New_model/CarWashing/Get_Promo_code_Model.dart';
 import '../Screen/Bottom.dart';
 import '../api/api_services.dart';
+import 'CommonWebView.dart';
 import 'Plan_Success_Srreen.dart';
 
 class BookingDetailsScreen extends StatefulWidget {
@@ -286,16 +287,17 @@ class _BookingDetailsScreenState extends State<BookingDetailsScreen> {
                     padding: const EdgeInsets.only(left: 5,right: 5,top: 5),
                     child: InkWell(
                       onTap: () async {
-                     //    print('xcscsfsfsdfsdxcscsfsfsdfsd');
-                     //   // PaytmConfig().generateTxnToken(double.parse(widget.amount.toString()) ,orderIdPaytm);
-                        await PaytmConfig2().generateTxnToken(double.parse(widget.amount.toString()), orderIdPaytm);
+                        // _launchURL();
+                        // _startPayment(context);
+                        // await PaytmConfig().generateTxnToken(double.parse(widget.amount.toString()), orderIdPaytm);
+                        // _startTransaction(finalTotal,linkPaytm);
                      //    // generateTxnToken(linkPaytm);
                      // // initiateTransaction("orderId",double.parse(widget.amount!),"txnToken",);
-                     //    if(changePrice){
-                     //      openCheckout(disCountAmount);
-                     //    }else{
-                     //      openCheckout(widget.amount);
-                     //    }
+                        if(changePrice){
+                          openCheckout(disCountAmount);
+                        }else{
+                          openCheckout(widget.amount);
+                        }
 
                       },
                       child: Container(
@@ -331,7 +333,7 @@ class _BookingDetailsScreenState extends State<BookingDetailsScreen> {
                     ),
                   ),
                 ),
-
+                
               ],
             ),
           ),
@@ -340,51 +342,32 @@ class _BookingDetailsScreenState extends State<BookingDetailsScreen> {
     );
 
   }
-  //
-  // final String merchantId = '<YOUR_MERCHANT_ID>';
-  // final String orderId = '<UNIQUE_ORDER_ID>';
-  // final String customerId = '<CUSTOMER_ID>';
-  // final String amount = '<AMOUNT>';
-  // final String callbackUrl = '<CALLBACK_URL>';
-  // final String email = '<CUSTOMER_EMAIL>';
-  // final String mobileNumber = '<CUSTOMER_MOBILE_NUMBER>';
-  //
-  // initiateTransaction(
-  //     String orderId, double amount,
-  //     String txnToken,
-  //     String callBackUrl
-  //     )
-  // async {
-  //   String result = '';
-  //   try {
-  //     var response = AllInOneSdk.startTransaction(
-  //       midPaytm,
-  //       orderIdPaytm,
-  //       widget.amount.toString(),
-  //       "txnToken",
-  //       linkPaytm,
-  //       false, // isStaging
-  //       false, // restrictAppInvoke
-  //     );
-  //     response.then((value) {
-  //       // Transaction successfull
-  //       print(value);
-  //     }).catchError((onError) {
-  //       if (onError is PlatformException) {
-  //         result = onError.message! + " \n  " + onError.details.toString();
-  //         print(result);
-  //       } else {
-  //         result = onError.toString();
-  //         print(result);
-  //       }
-  //     });
-  //   } catch (err) {
-  //     // Transaction failed
-  //     result = err.toString();
-  //     print(result);
+  // final FlutterAppAuth appAuth = FlutterAppAuth();
+  // _launchURL() async {
+  //   const url = 'https://mercury-t2.phonepe.com/transact/pg?token=MDFhZjIxZjExOWE0MDQwMTgzYjI1MTdkNGMxYmRiNjVhMDIwNzExYWM2NmNlYzFjN2U1MDlmMDU0Mjc5ODMxMWVhOTk0MzA1ODRlN2Q3OGM5ZjJjNjYyMWZhOjdlZTBmNjM4YTA1YTZlNTQ1MzMwMmJhNzIxMTgyMDBj';
+  //   if (await canLaunch(url)) {
+  //     await launch(url);
+  //   } else {
+  //     throw 'Could not launch $url';
   //   }
   // }
-
+  //
+  // Future<void> handleRedirect() async {
+  //   final AuthorizationTokenResponse? response =
+  //   await appAuth.authorizeAndExchangeCode(
+  //     AuthorizationTokenRequest(
+  //       'your_client_id', // Replace with your client ID
+  //       'your_redirect_uri', // Replace with your redirect URI
+  //       serviceConfiguration: AuthorizationServiceConfiguration(
+  //          // Replace with PhonePe authorization endpoint URL
+  //          authorizationEndpoint: 'token_endpoint_url', tokenEndpoint: 'authorization_endpoint_url', // Replace with PhonePe token endpoint URL
+  //       ),
+  //     ),
+  //   );
+  //
+  //   // Process the payment response
+  //   // Extract necessary information from response.accessToken or response.additionalParameters
+  // }
 
 
   vehicleDetails(){
@@ -693,177 +676,63 @@ class _BookingDetailsScreenState extends State<BookingDetailsScreen> {
                 )
 
             ),
+
           ],
         ),
       ),
     );
   }
+  void _startPayment(BuildContext context) async {
+    String orderId = DateTime.now().millisecondsSinceEpoch.toString();
+    double amount = 100.0; // Replace with your desired amount
 
-
-
+    await PaytmPayment.startTransaction(orderId, amount, context);
+  }
 
 
 }
 
-class PaytmConfig2 {
-  final String _mid = "hvdQiD63153182059850";
-  final String _mKey = "eHW4uuBUOHG1IiJr";
-  final String _website = "WEBSTAGING"; // or "WEBSTAGING" in Testing
-  final String _url =
-      'https://flutter-paytm-backend.herokuapp.com/generateTxnToken'; // Add your own backend URL
 
-  String get mid => _mid;
-  String get mKey => _mKey;
-  String get website => _website;
-  String get url => _url;
+class PaytmPayment {
+  static const String merchantId = 'hvdQiD63153182059850';
+  static const String merchantKey = 'eHW4uuBUOHG1IiJr';
+  static const String channelId = 'WAP';
+  static const String website = 'WEBSTAGING';
+  static const String callbackUrl =
+      'https://mercury-t2.phonepe.com/transact/pg?token=OWE5N2E0OTQwMDEyOTg3NjlhMTQyMjdmYzUxMjFjODYwNjhlYTE2N2EwMjk3MDcxOWRkYjc4NDI2YmZjMzI3ZWE5MTBiZmQ3MjJiNmFiNzJkZTExOjFlZTFmNWViMWQzNDMxMmUyY2MxMzkwN2NhMGUyODhk';
 
+  static Future<void> startTransaction(
+      String orderId, double amount, BuildContext context) async {
+    var paytmParams = {
+      'MID': "hvdQiD63153182059850",
+      'ORDER_ID': 3000,
+      'CUST_ID': 'CUSTOMER_ID',
+      'CHANNEL_ID': channelId,
+      'TXN_AMOUNT': "300",
+      'WEBSITE': website,
+      'INDUSTRY_TYPE_ID': 'Retail   ',
+      'CALLBACK_URL': "https://mercury-t2.phonepe.com/transact/pg?token=OWE5N2E0OTQwMDEyOTg3NjlhMTQyMjdmYzUxMjFjODYwNjhlYTE2N2EwMjk3MDcxOWRkYjc4NDI2YmZjMzI3ZWE5MTBiZmQ3MjJiNmFiNzJkZTExOjFlZTFmNWViMWQzNDMxMmUyY2MxMzkwN2NhMGUyODhk",
+    };
+    var paytmUrl = 'https://securegw.paytm.in/theia/processTransaction';
+    var response = await Navigator.push(
+      context,
+      MaterialPageRoute(
+        builder: (context) => WebView(
+          initialUrl: '$paytmUrl?${jsonEncode(paytmParams)}',
+          javascriptMode: JavascriptMode.unrestricted,
+        ),
+      ),
+    );
 
-
-  Future<void> generateTxnToken(double amount, String orderId) async {
-    final callBackUrl =
-        'https://securegw-stage.paytm.in/theia/paytmCallback?ORDER_ID=2000';
-    final body = getMap(amount, callBackUrl, orderId);
-
-    try {
-      final response = await http.post(
-        Uri.parse(url),
-        body: body,
-        headers: {'Content-type': "application/json"},
-      );
-      String txnToken = response.body;
-      await initiateTransaction(orderId, amount, txnToken, callBackUrl);
-    } catch (e) {
-      print(e);
-    }
-
-
-  }
-
-  String getMap(double amount, String callbackUrl, String orderId) {
-    return json.encode({
-      "mid": mid,
-      "key_secret": mKey,
-      "website": website,
-      "orderId": orderId,
-      "amount": amount.toString(),
-      "callbackUrl": callbackUrl,
-      "custId": "5", // Pass users Customer ID here
-    });
-  }
-
-  Future<void> initiateTransaction(String orderId, double amount,
-      String txnToken, String callBackUrl) async {
-    String result = '';
-    try {
-      var response = AllInOneSdk.startTransaction(
-        mid,
-        orderId,
-        amount.toString(),
-        txnToken,
-        callBackUrl,
-        false, // isStaging
-        false, // restrictAppInvoke
-      );
-      response.then((value) {
-        // Transaction successfull
-        print(value);
-      }).catchError((onError) {
-        if (onError is PlatformException) {
-          result = onError.message! + " \n  " + onError.details.toString();
-          print(result);
-        } else {
-          result = onError.toString();
-          print(result);
-        }
-      });
-    } catch (err) {
-      // Transaction failed
-      result = err.toString();
-      print(result);
+    // Process the response received from Paytm
+    if (response != null && response['STATUS'] == 'TXN_SUCCESS') {
+      // Payment success
+      print('Payment success');
+    } else {
+      // Payment failed
+      print('Payment failed');
     }
   }
+
 }
 
-
-class PaytmConfig {
-
-  bool changePrice = false;
-  var finalTotal;
-  var linkPaytm;
-  var midPaytm;
-  var orderIdPaytm;
-  var disCountAmount;
-  final String _mid = "hvdQiD63153182059850";
-  final String _mKey = "eHW4uuBUOHG1liJr";
-  final String _website = "DEFAULT";
-  final String _url =
-      'https://flutter-paytm-backend.herokuapp.com/generateTxnToken';
-
-  String get mid => _mid;
-  String get mKey => _mKey;
-  String get website => _website;
-  String get url => _url;
-
-  String getMap(double amount, String callbackUrl, String orderId) {
-    return json.encode({
-      "mid": mid,
-      "key_secret": mKey,
-      "website": website,
-      "orderId": orderIdPaytm,
-      "amount": finalTotal.toString(),
-      "callbackUrl": linkPaytm,
-      "custId": "122",
-    });
-  }
-
-  Future<void> generateTxnToken(double amount, String orderId,) async {
-    final callBackUrl =
-        'https://securegw.paytm.in/theia/paytmCallback?ORDER_ID=$orderId';
-    final body = getMap(amount, callBackUrl, orderId);
-
-    try {
-      final response = await http.post(
-        Uri.parse(url),
-        body: body,
-        headers: {'Content-type': "application/json"},
-      );
-      String txnToken = response.body;
-
-      await initiateTransaction(orderId, amount, txnToken, callBackUrl);
-    } catch (e) {
-      print(e);
-    }
-  }
-
-  Future<void> initiateTransaction(String orderId, double amount,
-      String txnToken, String callBackUrl) async {
-    String result = '';
-    try {
-      var response = AllInOneSdk.startTransaction(
-        mid,
-        orderId,
-        amount.toString(),
-        txnToken,
-        callBackUrl,
-        false,
-        false,
-      );
-      response.then((value) {
-        // Transaction successfull
-        print(value);
-      }).catchError((onError) {
-        if (onError is PlatformException) {
-          result = onError.message! + " \n  " + onError.details.toString();
-          print(result);
-        } else {
-          result = onError.toString();
-          print(result);
-        }
-      });
-    } catch (err) {
-      // Transaction failed
-      result = err.toString();
-      print(result);
-    }
-  }
-}

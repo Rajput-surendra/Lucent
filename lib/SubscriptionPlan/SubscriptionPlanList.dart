@@ -54,7 +54,7 @@ class _SubscriptionPlanScreenState extends State<SubscriptionPlanScreen> {
       appBar: customAppBar(context: context, text:"My Subscription Plan", isTrue: true, ),
       backgroundColor: colors.darkIcon,
         body: subscribedPlansListModel == null || subscribedPlansListModel!.data  == null ?
-        Center(child: CircularProgressIndicator()):subscribedPlansListModel!.data!.length == 0 ? Center(child: Text("No Data Found!!"),):Container(
+        Center(child: CircularProgressIndicator()):subscribedPlansListModel!.data!.length == 0 ? Center(child: Text("No Subscription Plan!!"),):Container(
           height: MediaQuery.of(context).size.height,
           child: ListView.builder(
            physics: ScrollPhysics(),
