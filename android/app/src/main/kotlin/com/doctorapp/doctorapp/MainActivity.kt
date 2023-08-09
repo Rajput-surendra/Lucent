@@ -1,4 +1,4 @@
-package com.lucent
+package com.lucentindia
 
 import io.flutter.embedding.android.FlutterActivity
 

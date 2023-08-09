@@ -148,7 +148,7 @@ class _HomeScreenState extends State<HomeScreen> {
   void initState() {
     super.initState();
     videoPlayerController = VideoPlayerController.network(
-        "https://alphawizzserver.com/car_wash/uploads/car-vedio.mp4");
+        "https://lucentservices.in/uploads/car-vedio.mp4");
     videoPlayerController!.initialize();
     videoPlayerController!.setLooping(false);
     videoPlayerController!.play();
@@ -353,7 +353,6 @@ class _HomeScreenState extends State<HomeScreen> {
                         ],
                       ),
                     ),
-
                     carStaticWidget(),
                     SizedBox(height: 15,),
                     getStaticWidget(),
@@ -531,26 +530,26 @@ class _HomeScreenState extends State<HomeScreen> {
                       color:  colors.primary
                   ),),
                   SizedBox(height: 3,),
-                  Text("Select Your Car Cleaning Services",style: TextStyle(fontSize: 14),),
+                  Text("Select Your Car Cleaning Services",style: TextStyle(fontSize: 16),),
                   //Text("Home Cleaning or Washroom Cleaning",style: TextStyle(fontSize: 14.3),),
                 ],
               ),
             ],
           ),
-          SizedBox(height: 10,),
+          SizedBox(height: 0,),
           Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
               Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  SizedBox(height: 10,),
-                  Text("Choose Your Time Slot",style: TextStyle(fontSize: 18,fontWeight: FontWeight.w500,
+                  SizedBox(height: 0,),
+                  Text(" Choose Your Time Slot",style: TextStyle(fontSize: 17,fontWeight: FontWeight.w500,
                     color:  colors.primary
                   ),
                   ),
                   SizedBox(height: 3,),
-                  Text(" Choose from the available time slots \n And Confirm the booking."),
+                  Text(" Choose from the available time slots \n And Confirm the booking.",style: TextStyle(fontSize: 15),),
                   // Padding(
                   //   padding: const EdgeInsets.only(right: 50),
                   //   child: Text(""),

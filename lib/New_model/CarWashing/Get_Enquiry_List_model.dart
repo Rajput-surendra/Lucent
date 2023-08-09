@@ -1,6 +1,6 @@
 /// status : true
 /// message : "Enquiry lists"
-/// data : [{"id":"12","user_id":"7","res_id":"1","name":"dggdhhr","mobile":"9787499494","message":"vzvdbdhdhdhfhd","created_at":"2023-06-13 09:34:17","update_at":"2023-06-13 09:34:17","logo":"https://alphawizzserver.com/car_wash/uploads/64871fa6c0fec.png","accessories_name":"Glass Cover","accessories_description":"Glass Cover\r\nGlass Cover\r\nGlass Cover"},{"id":"15","user_id":"7","res_id":"1","name":"gg","mobile":"2233556644","message":"fg","created_at":"2023-06-13 10:37:42","update_at":"2023-06-13 10:37:42","logo":"https://alphawizzserver.com/car_wash/uploads/64871fa6c0fec.png","accessories_name":"Glass Cover","accessories_description":"Glass Cover\r\nGlass Cover\r\nGlass Cover"}]
+/// data : [{"id":"12","user_id":"7","res_id":"1","name":"dggdhhr","mobile":"9787499494","message":"vzvdbdhdhdhfhd","created_at":"2023-06-13 09:34:17","update_at":"2023-06-13 09:34:17","logo":"https://lucentservices.in/uploads/64871fa6c0fec.png","accessories_name":"Glass Cover","accessories_description":"Glass Cover\r\nGlass Cover\r\nGlass Cover"},{"id":"15","user_id":"7","res_id":"1","name":"gg","mobile":"2233556644","message":"fg","created_at":"2023-06-13 10:37:42","update_at":"2023-06-13 10:37:42","logo":"https://lucentservices.in/uploads/64871fa6c0fec.png","accessories_name":"Glass Cover","accessories_description":"Glass Cover\r\nGlass Cover\r\nGlass Cover"}]
 
 class GetEnquiryListModel {
   GetEnquiryListModel({
@@ -56,7 +56,7 @@ GetEnquiryListModel copyWith({  bool? status,
 /// message : "vzvdbdhdhdhfhd"
 /// created_at : "2023-06-13 09:34:17"
 /// update_at : "2023-06-13 09:34:17"
-/// logo : "https://alphawizzserver.com/car_wash/uploads/64871fa6c0fec.png"
+/// logo : "https://lucentservices.in/uploads/64871fa6c0fec.png"
 /// accessories_name : "Glass Cover"
 /// accessories_description : "Glass Cover\r\nGlass Cover\r\nGlass Cover"
 

@@ -1,6 +1,6 @@
 /// status : true
 /// message : "Slider List"
-/// data : [{"id":"5","banners_name":"Car Washing Banner","image":"https://alphawizzserver.com/car_wash/uploads/632d5736dc2b5.jpg"}]
+/// data : [{"id":"5","banners_name":"Car Washing Banner","image":"https://lucentservices.in/uploads/632d5736dc2b5.jpg"}]
 
 class GetSliderModel {
   GetSliderModel({
@@ -50,7 +50,7 @@ GetSliderModel copyWith({  bool? status,
 
 /// id : "5"
 /// banners_name : "Car Washing Banner"
-/// image : "https://alphawizzserver.com/car_wash/uploads/632d5736dc2b5.jpg"
+/// image : "https://lucentservices.in/uploads/632d5736dc2b5.jpg"
 
 class Data {
   Data({

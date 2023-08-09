@@ -1,6 +1,6 @@
 /// status : true
 /// message : "Brands List"
-/// data : [{"id":"7","title":"Ford Motor Company","description":"Ford Motor Company","image":"https://alphawizzserver.com/car_wash/uploads/64870aeb8623c.png","created_at":"2023-06-12 12:09:57","updated_at":"2023-06-12 12:09:15"},{"id":"8","title":"BMW Group","description":"BMW Group","image":"https://alphawizzserver.com/car_wash/uploads/64870aff2778f.jpg","created_at":"2023-06-12 12:10:11","updated_at":"2023-06-12 12:09:35"}]
+/// data : [{"id":"7","title":"Ford Motor Company","description":"Ford Motor Company","image":"https://lucentservices.in/uploads/64870aeb8623c.png","created_at":"2023-06-12 12:09:57","updated_at":"2023-06-12 12:09:15"},{"id":"8","title":"BMW Group","description":"BMW Group","image":"https://lucentservices.in/uploads/64870aff2778f.jpg","created_at":"2023-06-12 12:10:11","updated_at":"2023-06-12 12:09:35"}]
 
 class GetBrandModel {
   GetBrandModel({
@@ -51,7 +51,7 @@ GetBrandModel copyWith({  bool? status,
 /// id : "7"
 /// title : "Ford Motor Company"
 /// description : "Ford Motor Company"
-/// image : "https://alphawizzserver.com/car_wash/uploads/64870aeb8623c.png"
+/// image : "https://lucentservices.in/uploads/64870aeb8623c.png"
 /// created_at : "2023-06-12 12:09:57"
 /// updated_at : "2023-06-12 12:09:15"
 

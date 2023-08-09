@@ -2,9 +2,9 @@ import 'dart:convert';
 import 'package:http/http.dart' as http;
 
 class ApiService {
-  static const String baseUrl = "https://alphawizzserver.com/car_wash/api/";
-  static const String imageUrl = "https://alphawizzserver.com/car_wash/";
-  static const String baseUrl1 = "https://alphawizzserver.com/car_wash/user/app/v1/api/";
+  static const String baseUrl = "https://lucentservices.in/api/";
+  static const String imageUrl = "https://lucentservices.in/";
+  static const String baseUrl1 = "https://lucentservices.in/user/app/v1/api/";
 
   static const String sendOTP = baseUrl+'send_otp';
   static const String verifyOtp = baseUrl+'verify_otp';

@@ -1,6 +1,6 @@
 /// status : true
 /// message : "User Profile"
-/// data : [{"id":"5","username":"surendra","email":"surendra@gmail.com","mobile":"9632500741","otp":"8643","address":"Indore Madhya Pradesh","lat":"","lng":"","profile_pic":"https://alphawizzserver.com/car_wash/uploads/profile_pics/user.png"}]
+/// data : [{"id":"5","username":"surendra","email":"surendra@gmail.com","mobile":"9632500741","otp":"8643","address":"Indore Madhya Pradesh","lat":"","lng":"","profile_pic":"https://lucentservices.in/uploads/profile_pics/user.png"}]
 
 class GetUserProfileModel {
   GetUserProfileModel({
@@ -56,7 +56,7 @@ GetUserProfileModel copyWith({  bool? status,
 /// address : "Indore Madhya Pradesh"
 /// lat : ""
 /// lng : ""
-/// profile_pic : "https://alphawizzserver.com/car_wash/uploads/profile_pics/user.png"
+/// profile_pic : "https://lucentservices.in/uploads/profile_pics/user.png"
 
 class Data {
   Data({

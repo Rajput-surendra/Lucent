@@ -1,6 +1,6 @@
 /// status : true
 /// message : "Accessories List"
-/// data : [{"id":"1","name":"Glass Cover","description":"Glass Cover\r\nGlass Cover\r\nGlass Cover","logo":"https://alphawizzserver.com/car_wash/uploads/64871fa6c0fec.png","brand":"Ford Motor Company","model":"Sudan","is_favorite":false}]
+/// data : [{"id":"1","name":"Glass Cover","description":"Glass Cover\r\nGlass Cover\r\nGlass Cover","logo":"https://lucentservices.in/uploads/64871fa6c0fec.png","brand":"Ford Motor Company","model":"Sudan","is_favorite":false}]
 
 class AccessoriesModel {
   AccessoriesModel({
@@ -51,7 +51,7 @@ AccessoriesModel copyWith({  bool? status,
 /// id : "1"
 /// name : "Glass Cover"
 /// description : "Glass Cover\r\nGlass Cover\r\nGlass Cover"
-/// logo : "https://alphawizzserver.com/car_wash/uploads/64871fa6c0fec.png"
+/// logo : "https://lucentservices.in/uploads/64871fa6c0fec.png"
 /// brand : "Ford Motor Company"
 /// model : "Sudan"
 /// is_favorite : false

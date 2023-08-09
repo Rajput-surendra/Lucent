@@ -1,6 +1,6 @@
 /// status : true
 /// message : "Brands List"
-/// data : [{"id":"92","c_name":"Chevrolet","c_name_a":"","icon":"","sub_title":"","description":"Chevrolet","img":"648709050c2db.png","type":"vip","p_id":"7","addons":"","lists":null,"image":"https://alphawizzserver.com/car_wash/uploads/648709050c2db.png"}]
+/// data : [{"id":"92","c_name":"Chevrolet","c_name_a":"","icon":"","sub_title":"","description":"Chevrolet","img":"648709050c2db.png","type":"vip","p_id":"7","addons":"","lists":null,"image":"https://lucentservices.in/uploads/648709050c2db.png"}]
 
 class GetModelCar {
   GetModelCar({
@@ -59,7 +59,7 @@ GetModelCar copyWith({  bool? status,
 /// p_id : "7"
 /// addons : ""
 /// lists : null
-/// image : "https://alphawizzserver.com/car_wash/uploads/648709050c2db.png"
+/// image : "https://lucentservices.in/uploads/648709050c2db.png"
 
 class Data {
   Data({

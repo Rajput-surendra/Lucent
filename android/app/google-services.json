@@ -41,6 +41,43 @@
           ]
         }
       }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:225437587035:android:16bbf010badb1493dc917e",
+        "android_client_info": {
+          "package_name": "com.lucentindia"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "225437587035-rrebsvfiqcb5251rha7pjgk85ie6fk55.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.lucentindia",
+            "certificate_hash": "a03a27e98c684b59c9472da46711279e1e2c8378"
+          }
+        },
+        {
+          "client_id": "225437587035-kb59cvdp0dvsqs9mk9pjg3c0g0s7qrk5.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyA_lJ2bYXq2UyVPJIkHdFVKTK5jMtfx1t0"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "225437587035-kb59cvdp0dvsqs9mk9pjg3c0g0s7qrk5.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
     }
   ],
   "configuration_version": "1"

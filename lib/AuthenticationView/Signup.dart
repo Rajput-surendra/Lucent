@@ -172,14 +172,14 @@ class _SignupScreenState extends State<SignupScreen> {
                     padding: const EdgeInsets.only(top: 40),
                     child: Container(
                         alignment: Alignment.center,
-                        height: 120,
-                        child: Image.asset("assets/splash/splashimages.png",scale: 6.2,)),
+                        height: 150,
+                        child: Image.asset("assets/splash/splashimages.png",scale: 5.6,)),
                   ),
 
                   Align(
                     alignment: Alignment.center,
                     child: Padding(
-                      padding: const EdgeInsets.only(left: 15,right: 15,top: 100,bottom: 20),
+                      padding: const EdgeInsets.only(left: 15,right: 15,top: 90,bottom: 20),
                       child: Card(
                           shape: RoundedRectangleBorder(
                               borderRadius: BorderRadius.circular(20)
@@ -219,7 +219,7 @@ class _SignupScreenState extends State<SignupScreen> {
                                           Container(
                                             height: 50,
                                             decoration: BoxDecoration(borderRadius: BorderRadius.circular(10),
-                                              color: colors.darkIcon,),
+                                              color: colors.darkIcon1,),
 
                                             child: TextFormField(
                                               style: TextStyle(color: colors.black54),
@@ -264,7 +264,7 @@ class _SignupScreenState extends State<SignupScreen> {
                                           Container(
                                             height: 50,
                                             decoration: BoxDecoration(borderRadius: BorderRadius.circular(10),
-                                                color: colors.darkIcon,),
+                                                color: colors.darkIcon1,),
                                             child: TextFormField(
                                               style: TextStyle(color: colors.black54),
                                               controller: mobileController,
@@ -310,7 +310,7 @@ class _SignupScreenState extends State<SignupScreen> {
                                           Container(
                                             height: 50,
                                             decoration: BoxDecoration(borderRadius: BorderRadius.circular(10),
-                                              color: colors.darkIcon,),
+                                              color: colors.darkIcon1,),
                                             child: TextFormField(
                                               style: TextStyle(color: colors.black54),
                                               controller: emailController,

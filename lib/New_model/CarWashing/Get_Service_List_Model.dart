@@ -1,6 +1,6 @@
 /// status : true
 /// message : "Brands List"
-/// data : [{"id":"90","c_name":"Sudan","c_name_a":"","icon":"","sub_title":"","description":"Sudan","img":"648709260f4e7.png","type":"vip","p_id":"8","addons":"","lists":null,"image":"https://alphawizzserver.com/car_wash/uploads/648709260f4e7.png"},{"id":"91","c_name":"Mercedes","c_name_a":"","icon":"","sub_title":"","description":"Mercedes","img":"6487090cafd6c.jpg","type":"vip","p_id":"8","addons":"","lists":null,"image":"https://alphawizzserver.com/car_wash/uploads/6487090cafd6c.jpg"},{"id":"92","c_name":"Chevrolet","c_name_a":"","icon":"","sub_title":"","description":"Chevrolet","img":"648709050c2db.png","type":"vip","p_id":"7","addons":"","lists":null,"image":"https://alphawizzserver.com/car_wash/uploads/648709050c2db.png"},{"id":"94","c_name":"BMW iX","c_name_a":"","icon":"","sub_title":"","description":"BMW iX","img":"64870e1529db6.png","type":"vip","p_id":"8","addons":"","lists":null,"image":"https://alphawizzserver.com/car_wash/uploads/64870e1529db6.png"}]
+/// data : [{"id":"90","c_name":"Sudan","c_name_a":"","icon":"","sub_title":"","description":"Sudan","img":"648709260f4e7.png","type":"vip","p_id":"8","addons":"","lists":null,"image":"https://lucentservices.in/uploads/648709260f4e7.png"},{"id":"91","c_name":"Mercedes","c_name_a":"","icon":"","sub_title":"","description":"Mercedes","img":"6487090cafd6c.jpg","type":"vip","p_id":"8","addons":"","lists":null,"image":"https://lucentservices.in/uploads/6487090cafd6c.jpg"},{"id":"92","c_name":"Chevrolet","c_name_a":"","icon":"","sub_title":"","description":"Chevrolet","img":"648709050c2db.png","type":"vip","p_id":"7","addons":"","lists":null,"image":"https://lucentservices.in/uploads/648709050c2db.png"},{"id":"94","c_name":"BMW iX","c_name_a":"","icon":"","sub_title":"","description":"BMW iX","img":"64870e1529db6.png","type":"vip","p_id":"8","addons":"","lists":null,"image":"https://lucentservices.in/uploads/64870e1529db6.png"}]
 
 class GetServiceListModel {
   GetServiceListModel({
@@ -59,7 +59,7 @@ GetServiceListModel copyWith({  bool? status,
 /// p_id : "8"
 /// addons : ""
 /// lists : null
-/// image : "https://alphawizzserver.com/car_wash/uploads/648709260f4e7.png"
+/// image : "https://lucentservices.in/uploads/648709260f4e7.png"
 
 class ServiceListData {
   ServiceListData({

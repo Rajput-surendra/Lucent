@@ -169,12 +169,12 @@ class _LoginScreenState extends State<LoginScreen> {
                   Container(
                     alignment: Alignment.center,
                     height: 250,
-                      child: Image.asset("assets/splash/splashimages.png",scale: 6.2,)),
+                      child: Image.asset("assets/splash/splashimages.png",scale: 6.6,)),
                   Align(
 
                     alignment: Alignment.center,
                     child: Padding(
-                      padding: const EdgeInsets.only(left: 15,right: 15),
+                      padding: const EdgeInsets.only(left: 15,right: 15,top: 20),
                       child: Card(
                         shape: RoundedRectangleBorder(
                           borderRadius: BorderRadius.circular(20)
@@ -248,7 +248,7 @@ class _LoginScreenState extends State<LoginScreen> {
                                       child: Container(
                                         height: 50,
                                         decoration: BoxDecoration(borderRadius: BorderRadius.circular(10),
-                                          color: colors.darkIcon,),
+                                          color: colors.darkIcon1,),
                                         child: TextFormField(
                                           style: TextStyle(color: colors.black54),
                                           controller: mobileController,

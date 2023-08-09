@@ -1,6 +1,6 @@
 /// error : false
 /// message : "All Counter success"
-/// data : [{"slug":"news","title":"News Update","image":"https://alphawizzserver.com/car_wash/uploads/img/news.png","counter":"2"},{"slug":"event","title":"Events & Webinars","image":"https://alphawizzserver.com/car_wash/uploads/img/event.png","counter":"0"},{"slug":"product","title":"Pharma Products","image":"https://alphawizzserver.com/car_wash/uploads/img/product.png","counter":"0"},{"slug":"editorial","title":"Editorial","image":"https://alphawizzserver.com/car_wash/uploads/img/editorial.png","counter":"0"},{"slug":"awareness","title":"Awareness Inputs","image":"https://alphawizzserver.com/car_wash/uploads/img/awareness.png","counter":"0"},{"slug":"advertisement","title":"Advertisement","image":"https://alphawizzserver.com/car_wash/uploads/img/advertisement.png","counter":"0"}]
+/// data : [{"slug":"news","title":"News Update","image":"https://lucentservices.in/uploads/img/news.png","counter":"2"},{"slug":"event","title":"Events & Webinars","image":"https://lucentservices.in/uploads/img/event.png","counter":"0"},{"slug":"product","title":"Pharma Products","image":"https://lucentservices.in/uploads/img/product.png","counter":"0"},{"slug":"editorial","title":"Editorial","image":"https://lucentservices.in/uploads/img/editorial.png","counter":"0"},{"slug":"awareness","title":"Awareness Inputs","image":"https://lucentservices.in/uploads/img/awareness.png","counter":"0"},{"slug":"advertisement","title":"Advertisement","image":"https://lucentservices.in/uploads/img/advertisement.png","counter":"0"}]
 
 class GetCountingModel {
   GetCountingModel({
@@ -50,7 +50,7 @@ GetCountingModel copyWith({  bool? error,
 
 /// slug : "news"
 /// title : "News Update"
-/// image : "https://alphawizzserver.com/car_wash/uploads/img/news.png"
+/// image : "https://lucentservices.in/uploads/img/news.png"
 /// counter : "2"
 
 class Data {

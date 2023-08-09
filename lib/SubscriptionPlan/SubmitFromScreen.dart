@@ -351,7 +351,6 @@ class _SubmitFromScreenState extends State<SubmitFromScreen> {
                        getCityModel == null || getCityModel ==  ""  ?
                        Text("Load!!!"):  Container(
                          width: MediaQuery.of(context).size.width/1.0,
-
                          decoration: BoxDecoration(
                            color: colors.darkIcon1,
                            borderRadius: BorderRadius.circular(10),
