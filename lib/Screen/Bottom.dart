@@ -385,25 +385,24 @@ class _BottomScreenState extends State<BottomScreen> {
             },
           ),
 
-
-
-          // ListTile(
-          //   leading: Image.asset(
-          //     "assets/images/Change Password.png",
-          //     color: colors.black54,
-          //     height: 40,
-          //     width: 40,
-          //   ),
-          //   title: Text(
-          //     'Change Password',
-          //   ),
-          //   onTap: () {
-          //     Navigator.push(
-          //       context,
-          //       MaterialPageRoute(builder: (context) => UpdatePassword()),
-          //     );
-          //   },
-          // ),
+          ListTile(
+            leading: Image.asset(
+              "assets/images/DELETE.png",
+            color: colors.primary,
+              height: 25,
+              width: 40,
+            ),
+            title: Text(
+              'Delete Account',
+            ),
+            onTap: () {
+              deleteAccountDailog();
+              //   Navigator.push(
+              //     context,
+              //     MaterialPageRoute(builder: (context) => HomeScreen()),
+              //   );
+            },
+          ),
           ListTile(
             leading: Image.asset(
               "assets/images/Sign Out.png",
@@ -457,5 +456,87 @@ class _BottomScreenState extends State<BottomScreen> {
         ],
       ),
     );
+  }
+  dialogAnimate(BuildContext context, Widget dialge) {
+    return showGeneralDialog(
+        barrierColor: Colors.black.withOpacity(0.5),
+        transitionBuilder: (context, a1, a2, widget) {
+          return Transform.scale(
+            scale: a1.value,
+            child: Opacity(opacity: a1.value, child: dialge),
+          );
+        },
+        transitionDuration: Duration(milliseconds: 200),
+        barrierDismissible: true,
+        barrierLabel: '',
+        context: context,
+        // pageBuilder: null
+        pageBuilder: (context, animation1, animation2) {
+          return Container();
+        } //as Widget Function(BuildContext, Animation<double>, Animation<double>)
+    );
+  }
+  deleteAccountDailog() async {
+    await dialogAnimate(context,
+        StatefulBuilder(builder: (BuildContext context, StateSetter setStater) {
+          return StatefulBuilder(
+              builder: (BuildContext context, StateSetter setStater) {
+                return AlertDialog(
+                  shape: RoundedRectangleBorder(
+                      borderRadius: BorderRadius.all(Radius.circular(5.0))),
+                  content: Text(
+                      "Are you sure you want to delete?",
+                      style: TextStyle(color: colors.primary)
+                  ),
+                  actions: <Widget>[
+                    TextButton(
+                        child: Text( "NO",style: TextStyle(color: Colors.black),
+                        ),
+                        onPressed: () {
+                          Navigator.of(context).pop(false);
+                        }),
+                    TextButton(
+                        child:  Text( "YES",style: TextStyle(color: Colors.black),
+                        ),
+                        onPressed: () {
+                          deleteAccount();
+                          Navigator.of(context).pop(false);
+                          // SettingProvider settingProvider =
+                          // Provider.of<SettingProvider>(context, listen: false);
+                          // settingProvider.clearUserSession(context);
+                          // //favList.clear();
+                          // Navigator.of(context).pushNamedAndRemoveUntil(
+                          //     '/home', (Route<dynamic> route) => false);
+                        })
+                  ],
+                );
+              });
+        }));
+  }
+
+  deleteAccount() async {
+    SharedPreferences preferences = await SharedPreferences.getInstance();
+    String? userID = preferences.getString('userId');
+    var headers = {
+      'Cookie': 'ci_session=96944ca78b243ab8f0408ccfec94c5f2d8ca05fc'
+    };
+    var request = http.MultipartRequest('POST', Uri.parse('${ApiService.deleteApi}'));
+    request.fields.addAll({
+      'user_id': userID.toString()
+    });
+    print("---------surendra---------${request.fields} ${ApiService.deleteApi} ");
+    request.headers.addAll(headers);
+
+    http.StreamedResponse response = await request.send();
+    if (response.statusCode == 200) {
+      var result = await response.stream.bytesToString();
+      var finalResult =  jsonDecode(result);
+      Fluttertoast.showToast(msg: "${finalResult['message']}",backgroundColor: colors.secondary);
+      Navigator.push(context, MaterialPageRoute(builder: (context)=>LoginScreen()));
+    }
+    else {
+      print(response.reasonPhrase);
+    }
+
   }
 }

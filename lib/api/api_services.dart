@@ -31,12 +31,13 @@ class ApiService {
   static const String checkPromoCodeApi = baseUrl+'check_promo_code';
   static const String getPromoCodeApi = baseUrl+'get_promo_code';
   static const String getGeneratePaytmApi = baseUrl+'generate_paytm_txn_token';
+  static const String deleteApi = baseUrl+'delete_account';
 
+
+    //////////////////////////// DR.Apps?????????????????????????
 
 
   static const String getEvents = baseUrl+'get_events';
-
-
     static const String getWebinar = baseUrl+'get_webinar';
   static const String getNewType = baseUrl+'get_news_type';
   static const String selectCategory = baseUrl+'select_category';
