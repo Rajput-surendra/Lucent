@@ -356,42 +356,42 @@ class _HomeScreenState extends State<HomeScreen> {
                     carStaticWidget(),
                     SizedBox(height: 15,),
                     getStaticWidget(),
-                    SizedBox(height: 15,),
-                   Padding(
-                     padding: const EdgeInsets.all(8.0),
-                     child: Container(
-                       height: 200,
-
-                  decoration: BoxDecoration(borderRadius: BorderRadius.circular(20),color: colors.whiteTemp),
-                  child: Stack(
-                      fit: StackFit.expand,
-                      children: [
-                        AspectRatio(
-                          aspectRatio: videoPlayerController!.value.aspectRatio,
-                          child: VideoPlayer(videoPlayerController!),
-                        ),
-                        Positioned(
-                            left: 0,
-                            right: 0,
-                            top: 0,
-                            bottom: 0,
-                            child: InkWell(
-                                onTap: (){
-                                  if (videoPlayerController!.value.isPlaying){
-                                    videoPlayerController!.pause();
-                                    isPlaying =false ;
-                                  }else{
-                                    isPlaying = true;
-                                    videoPlayerController!.play();
-                                  }
-                                  setState(() {
-
-                                  });
-                                },
-                                child: Icon(isPlaying ?? true ?Icons.pause  : Icons.play_arrow , color: Colors.white)))
-                      ],),
-                ),
-                   ),
+                //     SizedBox(height: 15,),
+                //    Padding(
+                //      padding: const EdgeInsets.all(8.0),
+                //      child: Container(
+                //        height: 200,
+                //
+                //   decoration: BoxDecoration(borderRadius: BorderRadius.circular(20),color: colors.whiteTemp),
+                //   child: Stack(
+                //       fit: StackFit.expand,
+                //       children: [
+                //         AspectRatio(
+                //           aspectRatio: videoPlayerController!.value.aspectRatio,
+                //           child: VideoPlayer(videoPlayerController!),
+                //         ),
+                //         Positioned(
+                //             left: 0,
+                //             right: 0,
+                //             top: 0,
+                //             bottom: 0,
+                //             child: InkWell(
+                //                 onTap: (){
+                //                   if (videoPlayerController!.value.isPlaying){
+                //                     videoPlayerController!.pause();
+                //                     isPlaying =false ;
+                //                   }else{
+                //                     isPlaying = true;
+                //                     videoPlayerController!.play();
+                //                   }
+                //                   setState(() {
+                //
+                //                   });
+                //                 },
+                //                 child: Icon(isPlaying ?? true ?Icons.pause  : Icons.play_arrow , color: Colors.white)))
+                //       ],),
+                // ),
+                //    ),
                     SizedBox(height: 10,),
 
                     // Padding(
