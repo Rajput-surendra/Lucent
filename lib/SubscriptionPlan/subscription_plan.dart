@@ -94,7 +94,7 @@ class _SubscriptionPlanState extends State<SubscriptionPlan> {
    setState(() {
 
    });
-   Navigator.push(context, MaterialPageRoute(builder: (context)=>BottomScreen()));
+   Navigator.push(context, MaterialPageRoute(builder: (context)=>const BottomScreen()));
     }
     else {
     print(response.reasonPhrase);
@@ -137,20 +137,18 @@ class _SubscriptionPlanState extends State<SubscriptionPlan> {
 // bool isPurchased
   @override
   Widget build(BuildContext context) {
-    print('_____Surendra__NEw___${widget.brandId}_________');
     return Scaffold(
       backgroundColor: colors.darkIcon,
       appBar: customAppBar(context: context, text:"Subscription Plan ", isTrue: true, ),
       body: Column(
         children: [
-          SizedBox(height: 10,),
-         getPlan == null  || getPlan == "" ?  Center(child: CircularProgressIndicator()):getPlan!.data!.length == 0 ? Center(child: Text("No Data Found!!")):getPlan!.data!.length == 0 ? Center(
+          const SizedBox(height: 10,),
+         getPlan == null  || getPlan == "" ?  const Center(child: CircularProgressIndicator()):getPlan!.data!.length == 0 ? const Center(child: Text("No Data Found!!")):getPlan!.data!.length == 0 ? const Center(
            child:   Text("No Data Found!!")
          ) :
          Container(
            height: MediaQuery.of(context).size.height/1.2,
            child: ListView.builder(
-
             itemCount: getPlan!.data!.length,
                itemBuilder: (context, int index, ) {
                  return Container(
@@ -190,22 +188,22 @@ class _SubscriptionPlanState extends State<SubscriptionPlan> {
                                          child: Text(
                                            "${getPlan!.data![index].title}",
                                            maxLines: 1,
-                                           style: TextStyle(fontWeight: FontWeight.bold, fontSize: 20,color: colors.blackTemp,overflow: TextOverflow.ellipsis,),
+                                           style: const TextStyle(fontWeight: FontWeight.bold, fontSize: 20,color: colors.blackTemp,overflow: TextOverflow.ellipsis,),
                                          ),
                                        ),
-                                       SizedBox(height: 5,),
-                                       Text("₹ ${getPlan!.data![index].amount}",style: TextStyle(color: colors.secondary,fontWeight: FontWeight.bold,fontSize: 18,
+                                       const SizedBox(height: 5,),
+                                       Text("₹ ${getPlan!.data![index].amount}",style: const TextStyle(color: colors.secondary,fontWeight: FontWeight.bold,fontSize: 18,
                                        ),),
-                                       SizedBox(height: 5),
-                                       Text( "${getPlan!.data![index].timeText}",style: TextStyle(color: colors.blackTemp),),
-                                       SizedBox(height: 5),
-                                       Text( "${getPlan!.data![index].vehicleType}",style: TextStyle(color: colors.blackTemp),),
+                                       const SizedBox(height: 5),
+                                       Text( "${getPlan!.data![index].timeText}",style: const TextStyle(color: colors.blackTemp),),
+                                       const SizedBox(height: 5),
+                                       Text( "${getPlan!.data![index].vehicleType}",style: const TextStyle(color: colors.blackTemp),),
                                      ],
                                    ),
                                  )
                                ],
                              ),
-                               SizedBox(height: 20,),
+                               const SizedBox(height: 20,),
 
                              getPlan!.data![index].isPurchased == true ? Padding(
                                padding: const EdgeInsets.only(left: 20,right: 20),
@@ -213,7 +211,7 @@ class _SubscriptionPlanState extends State<SubscriptionPlan> {
                                  height: 45,
                                  width: double.infinity,
                                  decoration: BoxDecoration(
-                                     gradient: LinearGradient(
+                                     gradient: const LinearGradient(
                                        begin: Alignment.topRight,
                                        end: Alignment.bottomLeft,
                                        stops: [0.1, 0.7,],
@@ -226,7 +224,7 @@ class _SubscriptionPlanState extends State<SubscriptionPlan> {
                                      //color: colors.secondary,
                                      borderRadius: BorderRadius.circular(10)
                                  ),
-                                 child: Center(child: Text("Purchased",style: TextStyle(color: colors.whiteTemp,fontWeight: FontWeight.bold,fontSize: 18),)),
+                                 child: const Center(child: Text("Purchased",style: TextStyle(color: colors.whiteTemp,fontWeight: FontWeight.bold,fontSize: 18),)),
                                ),
                              ):
                              Padding(
@@ -241,7 +239,7 @@ class _SubscriptionPlanState extends State<SubscriptionPlan> {
                                    height: 45,
                                    width: double.infinity,
                                    decoration: BoxDecoration(
-                                       gradient: LinearGradient(
+                                       gradient: const LinearGradient(
                                          begin: Alignment.topRight,
                                          end: Alignment.bottomLeft,
                                          stops: [0.1, 0.7,],
@@ -254,11 +252,11 @@ class _SubscriptionPlanState extends State<SubscriptionPlan> {
                                        //color: colors.secondary,
                                        borderRadius: BorderRadius.circular(10)
                                    ),
-                                   child: Center(child: Text("Book Service",style: TextStyle(color: colors.whiteTemp,fontWeight: FontWeight.bold,fontSize: 18),)),
+                                   child: const Center(child: Text("Book Service",style: TextStyle(color: colors.whiteTemp,fontWeight: FontWeight.bold,fontSize: 18),)),
                                  ),
                                ),
                              ),
-                             SizedBox(height: 20,),
+                             const SizedBox(height: 20,),
 
                            ],
                          ),

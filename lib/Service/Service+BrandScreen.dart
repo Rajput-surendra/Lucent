@@ -64,7 +64,7 @@ class _ServiceBrandScreenState extends State<ServiceBrandScreen> {
                     height: MediaQuery.of(context).size.height/1.18,
                     child: GridView.builder(
                       physics: NeverScrollableScrollPhysics(),
-                      gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+                      gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
                         crossAxisSpacing: 5,
                         mainAxisSpacing: 5,
                         crossAxisCount: 2,

@@ -49,14 +49,11 @@ class _LoginScreenState extends State<LoginScreen> {
     String? token ;
     try{
       token  = await FirebaseMessaging.instance.getToken();
-      print("-----------token:-----${token}");
     } on FirebaseException{
-      print('__________FirebaseException_____________');
     }
     SharedPreferences preferences = await SharedPreferences.getInstance();
     preferences.setString('otp', "otp");
     preferences.setString('mobile', "mobile");
-    print("this is apiiiiiiii");
     var headers = {
       'Cookie': 'ci_session=3463c437a12b70be3d42ff97fbb888c49cf6887f'
     };
@@ -65,13 +62,11 @@ class _LoginScreenState extends State<LoginScreen> {
       'mobile': mobileController.text,
       'fcm_id' : '${token}'
     });
-     print('____request.fields______${request.fields}_________');
     request.headers.addAll(headers);
     http.StreamedResponse response = await request.send();
     if (response.statusCode == 200) {
       var finalResponse = await response.stream.bytesToString();
       final jsonresponse = json.decode(finalResponse);
-      print("this is final responsesssssssssss${finalResponse}");
       if (jsonresponse['status'] == true) {
         String otp = jsonresponse['data'][0]['otp'];
         String mobile = jsonresponse['data'][0]['mobile'];
@@ -101,7 +96,6 @@ class _LoginScreenState extends State<LoginScreen> {
   void initState()  {
     FirebaseMessaging _firebaseMessaging = FirebaseMessaging.instance;
     _firebaseMessaging.getToken().then((token){
-      print("token is print-------------> $token");
     });
   }
 
@@ -115,19 +109,19 @@ class _LoginScreenState extends State<LoginScreen> {
               barrierDismissible: false,
               builder: (BuildContext context) {
                 return AlertDialog(
-                  title: Text("Confirm Exit"),
-                  content: Text("Are you sure you want to exit?"),
+                  title: const Text("Confirm Exit"),
+                  content: const Text("Are you sure you want to exit?"),
                   actions: <Widget>[
                     ElevatedButton(
                       style: ElevatedButton.styleFrom(primary: colors.primary),
-                      child: Text("YES"),
+                      child: const Text("YES"),
                       onPressed: () {
                         SystemNavigator.pop();
                       },
                     ),
                     ElevatedButton(
                       style: ElevatedButton.styleFrom(primary: colors.primary),
-                      child: Text("NO"),
+                      child: const Text("NO"),
                       onPressed: () {
                         Navigator.of(context).pop();
                       },
@@ -144,10 +138,10 @@ class _LoginScreenState extends State<LoginScreen> {
             child: Row(
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
-                Text("Dont have an account?",style: TextStyle(color: colors.blackTemp,fontSize: 14,fontWeight: FontWeight.bold),),
+                const Text("Dont have an account?",style: TextStyle(color: colors.blackTemp,fontSize: 14,fontWeight: FontWeight.bold),),
                 TextButton(onPressed: (){
                   Navigator.pushReplacement(context, MaterialPageRoute(builder: (context)=>SignupScreen()));
-                }, child: Text("SignUp",style: TextStyle(color: colors.secondary,fontSize: 16,fontWeight: FontWeight.bold),))
+                }, child: const Text("SignUp",style: TextStyle(color: colors.secondary,fontSize: 16,fontWeight: FontWeight.bold),))
               ],
             ),
           ),
@@ -159,7 +153,7 @@ class _LoginScreenState extends State<LoginScreen> {
                   Container(
                     height: 350,
                     width: double.infinity,
-                    decoration: BoxDecoration(
+                    decoration: const BoxDecoration(
                       image: DecorationImage(
                         image: AssetImage("assets/backlogin.png"),
                         fit: BoxFit.fill,
@@ -182,67 +176,20 @@ class _LoginScreenState extends State<LoginScreen> {
                           child: Column(
                             mainAxisSize:  MainAxisSize.min,
                             children: [
-                              SizedBox(height: 20,),
-                              Text("Welcome to Lucent",style: TextStyle(color: colors.primary
+                              const SizedBox(height: 20,),
+                              const Text("Welcome to Lucent",style: TextStyle(color: colors.primary
                                 ,fontWeight: FontWeight.bold,fontSize: 18,),),
                               Form(
                                 key: _formKey,
                                 child: Column(
                                   crossAxisAlignment: CrossAxisAlignment.start,
                                   children: [
-                                    Padding(
-                                      padding: const EdgeInsets.only(left: 10),
+                                    const Padding(
+                                      padding: EdgeInsets.only(left: 10),
                                       child: Text("Login",style: TextStyle(color: colors.primary
                                         ,fontWeight: FontWeight.bold,fontSize: 18,),),
                                     ),
-                                    // Padding(
-                                    //   padding: EdgeInsets.symmetric(
-                                    //       horizontal: 10, vertical: 10),
-                                    //   child: Container(
-                                    //     height: 60,
-                                    //     decoration: BoxDecoration(
-                                    //       borderRadius: BorderRadius.circular(15),
-                                    //       color: colors.whiteTemp,
-                                    //       //Theme.of(context).colorScheme.gray,
-                                    //     ),
-                                    //     child: Card(
-                                    //       shape:RoundedRectangleBorder(borderRadius: BorderRadius.circular(10)),
-                                    //       elevation: 0,
-                                    //       child: Center(
-                                    //         child: TextFormField(
-                                    //           controller: mobileController,
-                                    //           keyboardType: TextInputType.number,
-                                    //           maxLength: 10,
-                                    //           validator: (v) {
-                                    //             if (v!.length != 10) {
-                                    //               return "mobile number is required";
-                                    //             }
-                                    //           },
-                                    //           decoration: InputDecoration(
-                                    //
-                                    //             border: OutlineInputBorder(
-                                    //               borderSide: BorderSide(
-                                    //                 color: colors.primary
-                                    //               ),
-                                    //               borderRadius: BorderRadius.circular(20),
-                                    //
-                                    //             ),
-                                    //             counterText: "",
-                                    //             contentPadding:
-                                    //             EdgeInsets.only(left: 15, top: 15),
-                                    //             hintText: "Mobile Number",hintStyle: TextStyle(color: colors.secondary),
-                                    //             prefixIcon: Icon(
-                                    //               Icons.call,
-                                    //               color:colors.secondary,
-                                    //               size: 20,
-                                    //             ),
-                                    //
-                                    //           ),
-                                    //         ),
-                                    //       ),
-                                    //     ),
-                                    //   ),
-                                    // ),
+
                                     Padding(
                                       padding: const EdgeInsets.only(top: 20,left: 10,right: 10),
                                       child: Container(
@@ -250,11 +197,11 @@ class _LoginScreenState extends State<LoginScreen> {
                                         decoration: BoxDecoration(borderRadius: BorderRadius.circular(10),
                                           color: colors.darkIcon1,),
                                         child: TextFormField(
-                                          style: TextStyle(color: colors.black54),
+                                          style: const TextStyle(color: colors.black54),
                                           controller: mobileController,
                                           keyboardType: TextInputType.number,
                                           maxLength: 10,
-                                          decoration: InputDecoration(
+                                          decoration: const InputDecoration(
                                               counterText: "",
                                               hintText: 'Enter mobile',
                                               hintStyle: TextStyle(
@@ -293,14 +240,14 @@ class _LoginScreenState extends State<LoginScreen> {
                                               width: MediaQuery.of(context).size.width,
                                               decoration: BoxDecoration(borderRadius: BorderRadius.circular(30), color: colors.secondary),
                                               child:
-                                              isloader  ? Center(child: CircularProgressIndicator(color: Colors.white,),) :
-                                              Center(child: Text("Send OTP", style: TextStyle(fontSize: 18, color: colors.whiteTemp))),
+                                              isloader  ? const Center(child: CircularProgressIndicator(color: Colors.white,),) :
+                                              const Center(child: Text("Send OTP", style: TextStyle(fontSize: 18, color: colors.whiteTemp))),
                                             )
                                         )
 
                                     ),
 
-                                    SizedBox(
+                                    const SizedBox(
                                       height: 20,
                                     ),
 

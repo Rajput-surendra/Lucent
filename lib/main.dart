@@ -4,6 +4,7 @@ import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 
+import 'Enquiry/EnqurieOppUpScreen.dart';
 import 'Helper/notification_service.dart';
 
 
@@ -48,7 +49,8 @@ class MyApp extends StatelessWidget {
       debugShowCheckedModeBanner: false,
       initialRoute: '/',
       routes: {
-        '/': (context) => SplashScreen(),
+      // '/': (context) => SplashScreen(),
+      '/': (context) => EnqurieDetails(),
         //Splash(),
         // '/home': (context) => Dashboard(),
       },

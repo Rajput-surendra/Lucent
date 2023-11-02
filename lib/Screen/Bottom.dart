@@ -35,8 +35,8 @@ class BottomScreen extends StatefulWidget {
 class _BottomScreenState extends State<BottomScreen> {
   int currentindex = 0;
   List<Widget> pages1 = <Widget>[
-    HomeScreen(),
-    ProfileScreen(),
+    const HomeScreen(),
+    const ProfileScreen(),
 
   ];
 
@@ -59,14 +59,12 @@ class _BottomScreenState extends State<BottomScreen> {
     });
     SharedPreferences preferences = await SharedPreferences.getInstance();
     String? userId = preferences.getString('userId');
-    print("getProfile--------------->${userId}");
     var headers = {
       'Cookie': 'ci_session=d9075fff59f39b7a82c03ca267be8899c1a9fbf8'
     };
     var request = http.MultipartRequest(
         'POST', Uri.parse('${ApiService.getUserProfile}'));
     request.fields.addAll({'id': '$userId'});
-    print("getProfile--------------->${request.fields}");
     request.headers.addAll(headers);
 
     http.StreamedResponse response = await request.send();
@@ -75,8 +73,6 @@ class _BottomScreenState extends State<BottomScreen> {
       var finalResult = await response.stream.bytesToString();
       final jsonResponse =
       GetUserProfileModel.fromJson(json.decode(finalResult));
-      print("this is a ========>profile${jsonResponse}");
-      print("emailllllll${getprofile?.data?.first.mobile}");
       setState(() {
         getprofile = jsonResponse;
         profileLodder = false;
@@ -98,12 +94,12 @@ class _BottomScreenState extends State<BottomScreen> {
             barrierDismissible: false,
             builder: (BuildContext context) {
               return AlertDialog(
-                title: Text("Confirm Exit"),
-                content: Text("Are you sure you want to exit?"),
+                title: const Text("Confirm Exit"),
+                content: const Text("Are you sure you want to exit?"),
                 actions: <Widget>[
                   ElevatedButton(
                     style: ElevatedButton.styleFrom(primary: colors.secondary),
-                    child: Text("YES"),
+                    child: const Text("YES"),
                     onPressed: () {
                       SystemNavigator.pop();
                     },
@@ -113,7 +109,7 @@ class _BottomScreenState extends State<BottomScreen> {
                       Navigator.of(context).pop();
                     },
                     style: ElevatedButton.styleFrom(primary: colors.secondary),
-                    child: Text("NO"),
+                    child: const Text("NO"),
 
                   )
                 ],
@@ -124,10 +120,10 @@ class _BottomScreenState extends State<BottomScreen> {
       },
       child: SafeArea(
         child: Scaffold(
-         drawer: profileLodder ? Center(child: CircularProgressIndicator()) :getDrawer(),
+         drawer: profileLodder ? const Center(child: CircularProgressIndicator()) :getDrawer(),
           appBar: AppBar(
             titleSpacing: -20,
-            iconTheme: IconThemeData(color:colors.blackTemp),
+            iconTheme: const IconThemeData(color:colors.blackTemp),
             backgroundColor:colors.whiteTemp,
             title: Padding(
               padding: const EdgeInsets.only(right: 50),
@@ -139,9 +135,9 @@ class _BottomScreenState extends State<BottomScreen> {
                 child: InkWell(
                   onTap: (){
                     // Fluttertoast.showToast(msg: "Working in Progress");
-                 Navigator.push(context, MaterialPageRoute(builder: (context)=>NotificationList()));
+                 Navigator.push(context, MaterialPageRoute(builder: (context)=>const NotificationList()));
                   },
-                    child: Icon(Icons.notifications_active,color: colors.blackTemp,)),
+                    child: const Icon(Icons.notifications_active,color: colors.blackTemp,)),
               )
             ],
           ),
@@ -178,9 +174,9 @@ class _BottomScreenState extends State<BottomScreen> {
       child: ListView(
         children: <Widget>[
           Container(
-            padding: EdgeInsets.symmetric(horizontal: 12),
+            padding: const EdgeInsets.symmetric(horizontal: 12),
             height: 120,
-            decoration: BoxDecoration(
+            decoration: const BoxDecoration(
               gradient: LinearGradient(
                 begin: Alignment.topRight,
                 end: Alignment.bottomLeft,
@@ -197,7 +193,7 @@ class _BottomScreenState extends State<BottomScreen> {
                   getprofile?.data?.first.profilePic ?? '',
                   ),
                 ),
-                SizedBox(
+                const SizedBox(
                   width: 10,
                 ),
                 Container(
@@ -211,13 +207,13 @@ class _BottomScreenState extends State<BottomScreen> {
                             width: 160,
                             child: Text(
                               getprofile?.data?.first.username ?? '',
-                              style: TextStyle(
+                              style: const TextStyle(
                                   color: Colors.white,
                                   fontSize: 15,
                                   fontWeight: FontWeight.w500,overflow: TextOverflow.ellipsis,),
                             ),
                           ),
-                          SizedBox(
+                          const SizedBox(
                             height: 3,
                           ),
                         ],
@@ -228,7 +224,7 @@ class _BottomScreenState extends State<BottomScreen> {
                           getprofile?.data?.first.email ?? '',
                           maxLines: 1,
                           overflow: TextOverflow.ellipsis,
-                          style: TextStyle(
+                          style: const TextStyle(
                               color: Colors.white,
                               fontWeight: FontWeight.w500,
                               fontSize: 13),
@@ -240,11 +236,11 @@ class _BottomScreenState extends State<BottomScreen> {
               ],
             ),
           ),
-          SizedBox(
+          const SizedBox(
             height: 10,
           ),
           Container(
-            decoration: BoxDecoration(
+            decoration: const BoxDecoration(
               gradient: LinearGradient(
                 begin: Alignment.topRight,
                 end: Alignment.bottomLeft,
@@ -267,36 +263,17 @@ class _BottomScreenState extends State<BottomScreen> {
                   width: 35,
                 ),
               ),
-              title: Text(
+              title: const Text(
                 'Home',
               ),
               onTap: () {
                 Navigator.push(context,
-                    MaterialPageRoute(builder: (Context) => BottomScreen()));
-                // Navigator.push(
-                //   context,
-                //   MaterialPageRoute(builder: (context) => HomeScreen()),
-                // );
+                    MaterialPageRoute(builder: (Context) => const BottomScreen()));
+
               },
             ),
           ),
-          // ListTile(
-          //   leading: Image.asset(
-          //     "assets/images/home.png",
-          //     color: colors.black54,
-          //     height: 40,
-          //     width: 40,
-          //   ),
-          //   title: Text(
-          //     'Home',
-          //   ),
-          //   onTap: () {
-          //     Navigator.push(
-          //       context,
-          //       MaterialPageRoute(builder: (context) => BottomScreen()),
-          //     );
-          //   },
-          // ),
+
 
           ListTile(
             leading: Image.asset(
@@ -305,13 +282,13 @@ class _BottomScreenState extends State<BottomScreen> {
               height: 30,
               width: 30,
             ),
-            title: Text(
+            title: const Text(
               'My Bookings',
             ),
             onTap: () {
               Navigator.push(
                 context,
-                MaterialPageRoute(builder: (context) =>SubmitEnquiryListScreen()),
+                MaterialPageRoute(builder: (context) =>const SubmitEnquiryListScreen()),
               );
             },
           ),
@@ -322,13 +299,13 @@ class _BottomScreenState extends State<BottomScreen> {
               height: 25,
               width: 25,
             ),
-            title: Text(
+            title: const Text(
               'My Subscription Plan',
             ),
             onTap: () {
               Navigator.push(
                 context,
-                MaterialPageRoute(builder: (context) => SubscriptionPlanScreen()),
+                MaterialPageRoute(builder: (context) => const SubscriptionPlanScreen()),
               );
             },
           ),
@@ -340,13 +317,13 @@ class _BottomScreenState extends State<BottomScreen> {
               width: 25,
               color: colors.primary,
             ),
-            title: Text(
+            title: const Text(
               'Terms & Conditions',
             ),
             onTap: () {
               Navigator.push(
                 context,
-                MaterialPageRoute(builder: (context) => TermsCondition()),
+                MaterialPageRoute(builder: (context) => const TermsCondition()),
               );
             },
           ),
@@ -357,13 +334,13 @@ class _BottomScreenState extends State<BottomScreen> {
               height: 25,
               width: 25,
             ),
-            title: Text(
+            title: const Text(
               'Privacy Policy',
             ),
             onTap: () {
               Navigator.push(
                 context,
-                MaterialPageRoute(builder: (context) => PrivacyPolicy()),
+                MaterialPageRoute(builder: (context) => const PrivacyPolicy()),
               );
             },
           ),
@@ -374,13 +351,13 @@ class _BottomScreenState extends State<BottomScreen> {
               height: 25,
               width: 25,
             ),
-            title: Text(
+            title: const Text(
               'Contact Us',
             ),
             onTap: () {
               Navigator.push(
                 context,
-                MaterialPageRoute(builder: (context) => ContactUsScreen()),
+                MaterialPageRoute(builder: (context) => const ContactUsScreen()),
               );
             },
           ),
@@ -390,9 +367,9 @@ class _BottomScreenState extends State<BottomScreen> {
               "assets/images/DELETE.png",
             color: colors.primary,
               height: 25,
-              width: 40,
+              width: 25,
             ),
-            title: Text(
+            title: const Text(
               'Delete Account',
             ),
             onTap: () {
@@ -411,7 +388,7 @@ class _BottomScreenState extends State<BottomScreen> {
               width: 30,
               //color: Colors.grey.withOpacity(0.8),
             ),
-            title: Text(
+            title: const Text(
               'Sign Out',
             ),
             onTap: () async {
@@ -420,13 +397,13 @@ class _BottomScreenState extends State<BottomScreen> {
                   barrierDismissible: false,
                   builder: (BuildContext context) {
                     return AlertDialog(
-                      title: Text("Confirm Sign out"),
-                      content: Text("Are you sure you want to Sign out?"),
+                      title: const Text("Confirm Sign out"),
+                      content: const Text("Are you sure you want to Sign out?"),
                       actions: <Widget>[
                         ElevatedButton(
                           style:
                           ElevatedButton.styleFrom(primary: colors.primary),
-                          child: Text("YES"),
+                          child: const Text("YES"),
                           onPressed: () async {
                             SharedPreferences prefs =
                             await SharedPreferences.getInstance();
@@ -443,7 +420,7 @@ class _BottomScreenState extends State<BottomScreen> {
                         ElevatedButton(
                           style:
                           ElevatedButton.styleFrom(primary: colors.primary),
-                          child: Text("NO"),
+                          child: const Text("NO"),
                           onPressed: () {
                             Navigator.of(context).pop();
                           },
@@ -466,7 +443,7 @@ class _BottomScreenState extends State<BottomScreen> {
             child: Opacity(opacity: a1.value, child: dialge),
           );
         },
-        transitionDuration: Duration(milliseconds: 200),
+        transitionDuration: const Duration(milliseconds: 200),
         barrierDismissible: true,
         barrierLabel: '',
         context: context,
@@ -482,31 +459,25 @@ class _BottomScreenState extends State<BottomScreen> {
           return StatefulBuilder(
               builder: (BuildContext context, StateSetter setStater) {
                 return AlertDialog(
-                  shape: RoundedRectangleBorder(
+                  shape: const RoundedRectangleBorder(
                       borderRadius: BorderRadius.all(Radius.circular(5.0))),
-                  content: Text(
+                  content: const Text(
                       "Are you sure you want to delete?",
                       style: TextStyle(color: colors.primary)
                   ),
                   actions: <Widget>[
                     TextButton(
-                        child: Text( "NO",style: TextStyle(color: Colors.black),
+                        child: const Text( "NO",style: TextStyle(color: Colors.black),
                         ),
                         onPressed: () {
                           Navigator.of(context).pop(false);
                         }),
                     TextButton(
-                        child:  Text( "YES",style: TextStyle(color: Colors.black),
+                        child:  const Text( "YES",style: TextStyle(color: Colors.black),
                         ),
                         onPressed: () {
                           deleteAccount();
                           Navigator.of(context).pop(false);
-                          // SettingProvider settingProvider =
-                          // Provider.of<SettingProvider>(context, listen: false);
-                          // settingProvider.clearUserSession(context);
-                          // //favList.clear();
-                          // Navigator.of(context).pushNamedAndRemoveUntil(
-                          //     '/home', (Route<dynamic> route) => false);
                         })
                   ],
                 );
@@ -524,7 +495,6 @@ class _BottomScreenState extends State<BottomScreen> {
     request.fields.addAll({
       'user_id': userID.toString()
     });
-    print("---------surendra---------${request.fields} ${ApiService.deleteApi} ");
     request.headers.addAll(headers);
 
     http.StreamedResponse response = await request.send();

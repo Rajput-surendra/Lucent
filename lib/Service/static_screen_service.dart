@@ -12,7 +12,8 @@ import '../api/api_services.dart';
 import 'Service+BrandScreen.dart';
 
 class StaticScreenService extends StatefulWidget {
-  const StaticScreenService({Key? key}) : super(key: key);
+  String? name;
+   StaticScreenService({Key? key,this.name}) : super(key: key);
 
   @override
   State<StaticScreenService> createState() => _StaticScreenServiceState();
@@ -35,11 +36,14 @@ class _StaticScreenServiceState extends State<StaticScreenService> {
   var staticPage;
   var title;
   var images;
+
+
   getStaticApi() async {
     var headers = {
-      'Cookie': 'ci_session=a9e2b2b5babf936a50d21f49a14599f3dfd707aa'
+      'Cookie': 'ci_session=019fd08d09cd09b3ef17ca74468c0ff182c39982'
     };
-    var request = http.Request('GET', Uri.parse('${ApiService.getStaticServiceApi}'));
+    var request = http.MultipartRequest('GET', Uri.parse('${ApiService.getStaticServiceApi}?text=${widget.name.toString()}'));
+
     request.headers.addAll(headers);
     http.StreamedResponse response = await request.send();
     if (response.statusCode == 200) {
@@ -50,18 +54,39 @@ class _StaticScreenServiceState extends State<StaticScreenService> {
         title = jsonResponse['setting']['title'];
         images = jsonResponse['setting']['image'];
       });
-      print('_______sdsfdgd___${staticPage}_________');
-      print('_______sdsfdgd___${title}_________');
-      print('_______sdsfdgd___${images}_________');
+
     }
     else {
       print(response.reasonPhrase);
     }
 
-
   }
+  // getStaticApi() async {
+  //   var headers = {
+  //     'Cookie': 'ci_session=a9e2b2b5babf936a50d21f49a14599f3dfd707aa'
+  //   };
+  //   var request = http.Request('GET', Uri.parse('${ApiService.getStaticServiceApi}'));
+  //   request.headers.addAll(headers);
+  //   http.StreamedResponse response = await request.send();
+  //   if (response.statusCode == 200) {
+  //     final result =  await response.stream.bytesToString();
+  //     final jsonResponse = json.decode(result);
+  //     setState(() {
+  //       staticPage = jsonResponse['setting']['car_service_details'];
+  //       title = jsonResponse['setting']['title'];
+  //       images = jsonResponse['setting']['image'];
+  //     });
+  //
+  //   }
+  //   else {
+  //     print(response.reasonPhrase);
+  //   }
+  //
+  //
+  // }
   @override
   Widget build(BuildContext context) {
+
     return RefreshIndicator(
       key: _refreshIndicatorKey,
       onRefresh: _refresh,

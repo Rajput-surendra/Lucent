@@ -28,12 +28,6 @@ class SubmitFromScreen extends StatefulWidget {
 }
 
 class _SubmitFromScreenState extends State<SubmitFromScreen> {
-  // List<String> timeList = [
-  //   '11:00 AM - 11:30 AM',
-  //   '11:30 AM  - 12:00 AM',
-  //   "12:00 AM  - 12:30 PM",
-  //   "12:30 PM - 1:00 PM",
-  // ];
 
   var selectedTime ;
   final _formKey = GlobalKey<FormState>();
@@ -43,6 +37,7 @@ class _SubmitFromScreenState extends State<SubmitFromScreen> {
   TextEditingController SocityController = TextEditingController();
   TextEditingController blockController = TextEditingController();
   TextEditingController flatController = TextEditingController();
+  TextEditingController gstController = TextEditingController();
   TextEditingController modelController = TextEditingController();
   TextEditingController vehicleNumberController = TextEditingController();
   TextEditingController parkingController = TextEditingController();
@@ -78,7 +73,6 @@ class _SubmitFromScreenState extends State<SubmitFromScreen> {
         getTimeModel = finalResult;
       });
 
-      print('____dddddddd______${finalResult}_________');
     }
     else {
     print(response.reasonPhrase);
@@ -96,7 +90,6 @@ class _SubmitFromScreenState extends State<SubmitFromScreen> {
     if (response.statusCode == 200) {
        var result  = await response.stream.bytesToString();
        var finalResult = GetCityModel.fromJson(json.decode(result));
-       print("yyyyyyyyyyyyyyyyyyyyyyyyyy${finalResult}");
        setState(() {
          getCityModel = finalResult;
        });
@@ -121,7 +114,6 @@ class _SubmitFromScreenState extends State<SubmitFromScreen> {
     if (response.statusCode == 200) {
       var result  = await response.stream.bytesToString();
       var finalResult = GetAreaModel.fromJson(json.decode(result));
-      print("yyyyyyyyyyyyyyyyyyyyyyyyyy${finalResult}");
       setState(() {
         getAreaModel = finalResult;
       });
@@ -149,8 +141,10 @@ class _SubmitFromScreenState extends State<SubmitFromScreen> {
       'mobile': mobileController.text,
       'block': blockController.text,
       'flot': flatController.text,
+      'gst': gstController.text,
       'society': SocityController.text
     });
+    print('______sdsadsds____${request.fields}_________');
     request.headers.addAll(headers);
     http.StreamedResponse response = await request.send();
     if (response.statusCode == 200) {
@@ -159,7 +153,7 @@ class _SubmitFromScreenState extends State<SubmitFromScreen> {
       final finalResult = json.decode(result);
       setState(() {
       });
-      Navigator.push(context, MaterialPageRoute(builder: (context)=>BottomScreen()));
+      Navigator.push(context, MaterialPageRoute(builder: (context)=>const BottomScreen()));
       Fluttertoast.showToast(msg: finalResult['message']);
     }
     else {
@@ -171,9 +165,7 @@ class _SubmitFromScreenState extends State<SubmitFromScreen> {
   void openCheckout(amount) async {
     double res = double.parse(amount.toString());
     pricerazorpayy= int.parse(res.toStringAsFixed(0)) * 100;
-    print("checking razorpay price ${pricerazorpayy.toString()}");
-    print("checking razorpay price ${pricerazorpayy.toString()}");
-    // Navigator.of(context).pop();
+
     var options = {
       'key': 'rzp_test_1DP5mmOlF5G5ag',
       'amount': "${pricerazorpayy}",
@@ -189,13 +181,11 @@ class _SubmitFromScreenState extends State<SubmitFromScreen> {
   }
   Future<void> _handlePaymentSuccess(PaymentSuccessResponse response) async {
       getplanPurchaseSuccessApi();
-   // Fluttertoast.showToast(msg: "Subscription added successfully");
-    // Navigator.push(context, MaterialPageRoute(builder: (context)=>HomeScreen()));
+
   }
   void _handlePaymentError(PaymentFailureResponse response) {
     Fluttertoast.showToast(msg: "Payment cancelled by user");
-    // setSnackbar("ERROR", context);
-    // setSnackbar("Payment cancelled by user", context);
+
   }
   void _handleExternalWallet(ExternalWalletResponse response) {
   }
@@ -212,8 +202,6 @@ class _SubmitFromScreenState extends State<SubmitFromScreen> {
   // address = selectedCity + selectedPlace ;
   @override
   Widget build(BuildContext context) {
-    print('_____cccccccc_____${widget.modelName}_________');
-    print('_____cccccccc_____${widget.brandName}_________');
     return  Scaffold(
       backgroundColor: colors.darkIcon,
       appBar: customAppBar(context: context, text:"Booking", isTrue: true, ),
@@ -233,16 +221,16 @@ class _SubmitFromScreenState extends State<SubmitFromScreen> {
                    child: Column(
                      crossAxisAlignment: CrossAxisAlignment.start,
                      children: [
-                       Text(
+                       const Text(
                          "Customer Details ",
                          style: TextStyle(
                              color: colors.blackTemp, fontWeight: FontWeight.bold,fontSize: 20),
                        ),
-                       SizedBox(height: 10,),
+                       const SizedBox(height: 10,),
                        Padding(
-                           padding: EdgeInsets.all(5.0),
+                           padding: const EdgeInsets.all(5.0),
                            child:Row(
-                             children: [
+                             children: const [
                                Text(
                                  "Your Name",
                                  style: TextStyle(
@@ -266,13 +254,13 @@ class _SubmitFromScreenState extends State<SubmitFromScreen> {
                              borderRadius: BorderRadius.circular(10)
                          ),
                          child: TextFormField(
-                           style: TextStyle(color: colors.black54),
+                           style: const TextStyle(color: colors.black54),
                            controller: nameController,
                            keyboardType: TextInputType.text,
-                           decoration: InputDecoration(
+                           decoration: const InputDecoration(
                                prefixText: "",
                                hintText: 'Enter Name',
-                               hintStyle: const TextStyle(
+                               hintStyle: TextStyle(
                                    fontSize: 15.0, color: colors.primary,fontWeight: FontWeight.normal),
                                border: InputBorder.none,
                                contentPadding: EdgeInsets.only(left: 10, top: 5)),
@@ -286,13 +274,13 @@ class _SubmitFromScreenState extends State<SubmitFromScreen> {
                        Padding(
                            padding: const EdgeInsets.all(5.0),
                            child:Row(
-                             children: [
-                               const Text(
+                             children: const [
+                               Text(
                                  "Mobile No",
                                  style: TextStyle(
                                      color: colors.black54, fontWeight: FontWeight.bold),
                                ),
-                               const Text(
+                               Text(
                                  "*",
                                  style: TextStyle(
                                      color: colors.red, fontWeight: FontWeight.bold,fontSize: 10),
@@ -308,11 +296,11 @@ class _SubmitFromScreenState extends State<SubmitFromScreen> {
                              borderRadius: BorderRadius.circular(10)
                          ),
                          child: TextFormField(
-                           style: TextStyle(color: colors.black54),
+                           style: const TextStyle(color: colors.black54),
                            controller: mobileController,
                            keyboardType: TextInputType.number,
                            maxLength: 10,
-                           decoration: InputDecoration(
+                           decoration: const InputDecoration(
                                counterText: "",
                                hintText: 'Enter Mobile',
                                hintStyle:
@@ -326,13 +314,13 @@ class _SubmitFromScreenState extends State<SubmitFromScreen> {
                            },
                          ),
                        ),
-                       SizedBox(
+                       const SizedBox(
                          height: 10,
                        ),
                        Padding(
-                           padding: EdgeInsets.all(5.0),
+                           padding: const EdgeInsets.all(5.0),
                            child:Row(
-                             children: [
+                             children: const [
                                Text(
                                  "City",
                                  style: TextStyle(
@@ -349,7 +337,7 @@ class _SubmitFromScreenState extends State<SubmitFromScreen> {
 
                        ),
                        getCityModel == null || getCityModel ==  ""  ?
-                       Text("Load!!!"):  Container(
+                       const Text("Load!!!"):  Container(
                          width: MediaQuery.of(context).size.width/1.0,
                          decoration: BoxDecoration(
                            color: colors.darkIcon1,
@@ -422,11 +410,11 @@ class _SubmitFromScreenState extends State<SubmitFromScreen> {
 
                          ),
                        ),
-                       SizedBox(height: 10,),
+                       const SizedBox(height: 10,),
                        Padding(
-                           padding: EdgeInsets.all(5.0),
+                           padding: const EdgeInsets.all(5.0),
                            child:Row(
-                             children: [
+                             children: const [
                                Text(
                                  "Society",
                                  style: TextStyle(
@@ -443,7 +431,7 @@ class _SubmitFromScreenState extends State<SubmitFromScreen> {
 
                        ),
                        getAreaModel == null || getAreaModel ==  ""  ?
-                       Text("Load!!!"):   Container(
+                       const Text("Load!!!"):   Container(
                          width: MediaQuery.of(context).size.width/1.0,
                          decoration: BoxDecoration(
                            color:colors.darkIcon1,
@@ -483,7 +471,6 @@ class _SubmitFromScreenState extends State<SubmitFromScreen> {
                                      //selectedCity = null;
                                      //selectedPlace = null;
 
-                                     print('_____Surdfdgdgendra_____${placeId}_________');
                                      //getStateApi();
                                    }
                                  });
@@ -518,12 +505,12 @@ class _SubmitFromScreenState extends State<SubmitFromScreen> {
 
                          ),
                        ),
-                       SizedBox(height: 10,),
+                       const SizedBox(height: 10,),
 
                        Padding(
-                           padding: EdgeInsets.all(5.0),
+                           padding: const EdgeInsets.all(5.0),
                            child:Row(
-                             children: [
+                             children: const [
                                Text(
                                  "Address",
                                  style: TextStyle(
@@ -547,13 +534,13 @@ class _SubmitFromScreenState extends State<SubmitFromScreen> {
                              borderRadius: BorderRadius.circular(10)
                          ),
                          child: TextFormField(
-                           style: TextStyle(color: colors.black54),
+                           style: const TextStyle(color: colors.black54),
                            controller: addressController,
                            keyboardType: TextInputType.text,
-                           decoration: InputDecoration(
+                           decoration: const InputDecoration(
                                prefixText: "",
                                hintText: 'Enter Address',
-                               hintStyle: const TextStyle(
+                               hintStyle: TextStyle(
                                    fontSize: 15.0, color: colors.primary,fontWeight: FontWeight.normal),
                                border: InputBorder.none,
                                contentPadding: EdgeInsets.only(left: 10, top: 10)),
@@ -564,12 +551,12 @@ class _SubmitFromScreenState extends State<SubmitFromScreen> {
                            },
                          ),
                        ),
-                       SizedBox(height: 10,),
+                       const SizedBox(height: 10,),
 
                        Padding(
-                           padding: EdgeInsets.all(5.0),
+                           padding: const EdgeInsets.all(5.0),
                            child:Row(
-                             children: [
+                             children: const [
                                Text(
                                  "Block Name",
                                  style: TextStyle(
@@ -593,13 +580,13 @@ class _SubmitFromScreenState extends State<SubmitFromScreen> {
                              borderRadius: BorderRadius.circular(10)
                          ),
                          child: TextFormField(
-                           style: TextStyle(color: colors.black54),
+                           style: const TextStyle(color: colors.black54),
                            controller: blockController,
                            keyboardType: TextInputType.text,
-                           decoration: InputDecoration(
+                           decoration: const InputDecoration(
                                prefixText: "",
                                hintText: 'Enter block',
-                               hintStyle: const TextStyle(
+                               hintStyle: TextStyle(
                                    fontSize: 15.0, color: colors.primary,fontWeight: FontWeight.normal),
                                border: InputBorder.none,
                                contentPadding: EdgeInsets.only(left: 10, top: 5)),
@@ -612,9 +599,9 @@ class _SubmitFromScreenState extends State<SubmitFromScreen> {
                        ),
 
                        Padding(
-                           padding: EdgeInsets.all(5.0),
+                           padding: const EdgeInsets.all(5.0),
                            child:Row(
-                             children: [
+                             children: const [
                                Text(
                                  "Flat Number",
                                  style: TextStyle(
@@ -638,13 +625,13 @@ class _SubmitFromScreenState extends State<SubmitFromScreen> {
                              borderRadius: BorderRadius.circular(10)
                          ),
                          child: TextFormField(
-                           style: TextStyle(color: colors.black54),
+                           style: const TextStyle(color: colors.black54),
                            controller: flatController,
                            keyboardType: TextInputType.text,
-                           decoration: InputDecoration(
+                           decoration: const InputDecoration(
                                prefixText: "",
                                hintText: 'Enter Flat Number',
-                               hintStyle: const TextStyle(
+                               hintStyle: TextStyle(
                                    fontSize: 15.0, color: colors.primary,fontWeight: FontWeight.normal),
                                border: InputBorder.none,
                                contentPadding: EdgeInsets.only(left: 10, top: 5)),
@@ -655,11 +642,48 @@ class _SubmitFromScreenState extends State<SubmitFromScreen> {
                            },
                          ),
                        ),
-                       SizedBox(height: 10,),
+                       const SizedBox(height: 10,),
                        Padding(
-                           padding: EdgeInsets.all(5.0),
+                           padding: const EdgeInsets.all(5.0),
                            child:Row(
-                             children: [
+                             children: const [
+                               Text(
+                                 "GST Number (Optional)",
+                                 style: TextStyle(
+                                     color: colors.black54, fontWeight: FontWeight.bold),
+                               ),
+
+                             ],
+                           )
+
+
+                       ),
+                       Container(
+                         height: 55,
+                         decoration: BoxDecoration(
+                             color:
+                             colors.darkIcon1,
+                             borderRadius: BorderRadius.circular(10)
+                         ),
+                         child: TextFormField(
+                           style: const TextStyle(color: colors.black54),
+                           controller: gstController,
+                           keyboardType: TextInputType.text,
+                           decoration: const InputDecoration(
+                               prefixText: "",
+                               hintText: 'GST Number (Optional)',
+                               hintStyle: TextStyle(
+                                   fontSize: 15.0, color: colors.primary,fontWeight: FontWeight.normal),
+                               border: InputBorder.none,
+                               contentPadding: EdgeInsets.only(left: 10, top: 5)),
+
+                         ),
+                       ),
+                       const SizedBox(height: 10,),
+                       Padding(
+                           padding: const EdgeInsets.all(5.0),
+                           child:Row(
+                             children: const [
                                Text(
                                  "Time",
                                  style: TextStyle(
@@ -674,13 +698,13 @@ class _SubmitFromScreenState extends State<SubmitFromScreen> {
                            )
 
                        ),
-                       getTimeModel == null || getTimeModel!.data! == ""  ?Center(child: CircularProgressIndicator()):   Container(
+                       getTimeModel == null || getTimeModel!.data! == ""  ?const Center(child: CircularProgressIndicator()):   Container(
                          height: 50,
                          width: MediaQuery.of(context).size.width,
                          child: ListView.builder(
                              shrinkWrap: true,
                              itemCount:getTimeModel!.data!.length,
-                             physics: ScrollPhysics(),
+                             physics: const ScrollPhysics(),
                              scrollDirection: Axis.horizontal,
                              itemBuilder: (c,i){
                                return InkWell(
@@ -688,12 +712,11 @@ class _SubmitFromScreenState extends State<SubmitFromScreen> {
                                    setState(() {
                                      selectedTime = getTimeModel!.data![i].slot;
                                    });
-                                   print("selected time here  ${selectedTime}");
                                  },
                                  child: Container(
                                    alignment: Alignment.center,
-                                   padding: EdgeInsets.symmetric(horizontal: 5),
-                                   margin: EdgeInsets.only(right: 10),
+                                   padding: const EdgeInsets.symmetric(horizontal: 5),
+                                   margin: const EdgeInsets.only(right: 10),
                                    decoration: BoxDecoration(
                                      color: selectedTime == getTimeModel!.data![i].slot ? colors.primary : colors.darkIcon1,
                                      // width: selectedTime == timeList[i] ? 2 :1
@@ -721,16 +744,16 @@ class _SubmitFromScreenState extends State<SubmitFromScreen> {
                     child: Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
-                        Text(
+                        const Text(
                           "Vehicle Details ",
                           style: TextStyle(
                               color: colors.blackTemp, fontWeight: FontWeight.bold,fontSize: 20),
                         ),
-                        SizedBox(height: 10,),
+                        const SizedBox(height: 10,),
                         Padding(
-                            padding: EdgeInsets.all(5.0),
+                            padding: const EdgeInsets.all(5.0),
                             child:Row(
-                              children: [
+                              children: const [
                                 Text(
                                   "Vehicle Model",
                                   style: TextStyle(
@@ -754,13 +777,13 @@ class _SubmitFromScreenState extends State<SubmitFromScreen> {
                               borderRadius: BorderRadius.circular(10)
                           ),
                           child: TextFormField(
-                            style: TextStyle(color: colors.black54),
+                            style: const TextStyle(color: colors.black54),
                             controller: modelController,
                             keyboardType: TextInputType.text,
-                            decoration: InputDecoration(
+                            decoration: const InputDecoration(
                                 prefixText: "",
                                 hintText: 'Enter Vehicle Model',
-                                hintStyle: const TextStyle(
+                                hintStyle: TextStyle(
                                     fontSize: 15.0, color: colors.primary,fontWeight: FontWeight.normal),
                                 border: InputBorder.none,
                                 contentPadding: EdgeInsets.only(left: 10, top: 10)),
@@ -771,11 +794,11 @@ class _SubmitFromScreenState extends State<SubmitFromScreen> {
                             },
                           ),
                         ),
-                        SizedBox(height: 10,),
+                        const SizedBox(height: 10,),
                         Padding(
-                            padding: EdgeInsets.all(5.0),
+                            padding: const EdgeInsets.all(5.0),
                             child:Row(
-                              children: [
+                              children: const [
                                 Text(
                                   "Vehicle Number",
                                   style: TextStyle(
@@ -799,13 +822,13 @@ class _SubmitFromScreenState extends State<SubmitFromScreen> {
                               borderRadius: BorderRadius.circular(10)
                           ),
                           child: TextFormField(
-                            style: TextStyle(color: colors.black54),
+                            style: const TextStyle(color: colors.black54),
                             controller: vehicleNumberController,
                             keyboardType: TextInputType.text,
-                            decoration: InputDecoration(
+                            decoration: const InputDecoration(
                                 prefixText: "",
                                 hintText: 'Enter Vehicle Number',
-                                hintStyle: const TextStyle(
+                                hintStyle: TextStyle(
                                     fontSize: 15.0, color: colors.primary,fontWeight: FontWeight.normal),
                                 border: InputBorder.none,
                                 contentPadding: EdgeInsets.only(left: 10, top: 10)),
@@ -816,11 +839,11 @@ class _SubmitFromScreenState extends State<SubmitFromScreen> {
                             },
                           ),
                         ),
-                        SizedBox(height: 10,),
+                        const SizedBox(height: 10,),
                         Padding(
-                            padding: EdgeInsets.all(5.0),
+                            padding: const EdgeInsets.all(5.0),
                             child:Row(
-                              children: [
+                              children: const [
                                 Text(
                                   "Parking",
                                   style: TextStyle(
@@ -844,13 +867,13 @@ class _SubmitFromScreenState extends State<SubmitFromScreen> {
                               borderRadius: BorderRadius.circular(10)
                           ),
                           child: TextFormField(
-                            style: TextStyle(color: colors.black54),
+                            style: const TextStyle(color: colors.black54),
                             controller: parkingController,
                             keyboardType: TextInputType.text,
-                            decoration: InputDecoration(
+                            decoration: const InputDecoration(
                                 prefixText: "",
                                 hintText: 'Enter Parking',
-                                hintStyle: const TextStyle(
+                                hintStyle: TextStyle(
                                     fontSize: 15.0, color: colors.primary,fontWeight: FontWeight.normal),
                                 border: InputBorder.none,
                                 contentPadding: EdgeInsets.only(left: 10, top: 10)),
@@ -861,12 +884,12 @@ class _SubmitFromScreenState extends State<SubmitFromScreen> {
                             },
                           ),
                         ),
-                        SizedBox(height: 10,),
+                        const SizedBox(height: 10,),
 
                         Padding(
-                            padding: EdgeInsets.all(5.0),
+                            padding: const EdgeInsets.all(5.0),
                             child:Row(
-                              children: [
+                              children: const [
                                 Text(
                                   "LandMark",
                                   style: TextStyle(
@@ -890,13 +913,13 @@ class _SubmitFromScreenState extends State<SubmitFromScreen> {
                               borderRadius: BorderRadius.circular(10)
                           ),
                           child: TextFormField(
-                            style: TextStyle(color: colors.black54),
+                            style: const TextStyle(color: colors.black54),
                             controller: landMarkController,
                             keyboardType: TextInputType.text,
-                            decoration: InputDecoration(
+                            decoration: const InputDecoration(
                                 prefixText: "",
                                 hintText: 'Enter landMark',
-                                hintStyle: const TextStyle(
+                                hintStyle: TextStyle(
                                     fontSize: 15.0, color: colors.primary,fontWeight: FontWeight.normal),
                                 border: InputBorder.none,
                                 contentPadding: EdgeInsets.only(left: 10, top: 10)),
@@ -907,19 +930,19 @@ class _SubmitFromScreenState extends State<SubmitFromScreen> {
                             },
                           ),
                         ),
-                        SizedBox(height: 10,),
+                        const SizedBox(height: 10,),
                       ],
                     ),
                   ),
                 ),
               ),
-              SizedBox(height: 10,),
+              const SizedBox(height: 10,),
               Padding(
                 padding: const EdgeInsets.all(5.0),
                 child: InkWell(
                   onTap: (){
                     if(_formKey.currentState!.validate()){
-                      Navigator.push(context, MaterialPageRoute(builder: (context)=>BookingDetailsScreen(brandName:widget.brandName,modelName:modelController.text
+                      Navigator.push(context, MaterialPageRoute(builder: (context)=>BookingDetailsScreen(brandName:widget.brandName,modelName:modelController.text,gst: gstController.text
                           ,landMark: landMarkController.text,vihileNumber:  vehicleNumberController.text,
                         Purchased: widget.Purchased,days:widget.days,amount: widget.amount,title:widget.title
                         ,planId:widget.planId,addressC: addressController.text,blockC: blockController.text,flatC: flatController.text,mobileC: mobileController.text,
@@ -953,9 +976,9 @@ class _SubmitFromScreenState extends State<SubmitFromScreen> {
                     decoration: BoxDecoration(
                       color: colors.primary,
                         borderRadius: BorderRadius.circular(10)),
-                    child: Center(
+                    child: const Center(
                       child:Padding(
-                        padding: const EdgeInsets.all(8.0),
+                        padding: EdgeInsets.all(8.0),
                         child: Text("Next",
                           style: TextStyle(
                             fontWeight: FontWeight.bold,color: colors.whiteTemp,
